@@ -1,0 +1,6 @@
+[submodule "sources/wpubaseplugin"]
+	path = sources/wpubaseplugin
+	url = https://github.com/WordPressUtilities/wpubaseplugin.git
+[submodule "sources/BashUtilities"]
+	path = sources/BashUtilities
+	url = https://github.com/Darklg/BashUtilities.git

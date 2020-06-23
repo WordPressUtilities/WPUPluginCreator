@@ -8,20 +8,24 @@ Go to your favorite tools folder :
 
 ```
 git clone https://github.com/WordPressUtilities/WPUPluginCreator
+
+```
+Add CLI shortcut :
+
+```
+. WPUPluginCreator/inc/installer.sh;
 ```
 
 ## Road to MVP
 
-- [ ] Add an installer.
-- [ ] Add WPUBasePlugin as submodule for the tool.
-- [ ] Check if this is a WordPress plugin folder.
-- [ ] Ask the plugin repository ( to clone or add as a remote )
-- [ ] Ask the plugin name, generate Class Name & Project ID.
-- [ ] Generate a simple plugin skeleton with basic hooks.
+- [x] Add an installer.
+- [x] Add WPUBasePlugin as submodule for the tool.
+- [x] Ask the plugin name, generate Class Name & Project ID.
+- [x] Generate a simple plugin skeleton with basic hooks.
 
 ## Features
 
-- [ ] Add translation (ask language).
+- [x] Add translation (ask language).
 - [ ] Register a post-type (ask id / name).
 - [ ] Register a taxonomy (ask id / name).
 - [ ] Add a settings page.
@@ -39,5 +43,7 @@ git clone https://github.com/WordPressUtilities/WPUPluginCreator
 ## Quality of life
 
 - [ ] Self update.
+- [ ] Ask the plugin repository ( to clone or add as a remote )
+- [ ] Check if this is a WordPress plugin folder ? ( Just an alert, non blocking )
 
 
