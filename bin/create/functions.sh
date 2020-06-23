@@ -13,6 +13,7 @@ function wpuplugincreator_remove_markers(){
     _indent1=$'\n'"    ";
     _indent2=$'\n'"        ";
     file_content=$(cat "${_PLUGIN_FILE}");
+    file_content=${file_content//${_indent1}"##VARS##"/""};
     file_content=${file_content//${_indent2}"##CONSTRUCT##"/""};
     file_content=${file_content//${_indent2}"##PLUGINS_LOADED##"/""};
     file_content=${file_content//${_indent1}"##METHODS##"/""};

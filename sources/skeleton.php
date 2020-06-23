@@ -2,7 +2,7 @@
 /*
 Plugin Name: myplugin_name
 Plugin URI: https://github.com/WordPressUtilities/myplugin_id
-Description: MYDESCRIPTION
+Description: myplugin_name is a wonderful plugin.
 Version: 0.1.0
 Author: author_name
 Author URI: https://author_name.me/
@@ -13,6 +13,7 @@ License URI: http://opensource.org/licenses/MIT
 class myplugin_classname {
     private $plugin_version = '0.1.0';
     private $plugin_id = 'myplugin_id';
+    ##VARS##
 
     public function __construct() {
         add_filter('plugins_loaded', array(&$this, 'plugins_loaded'));
@@ -22,7 +23,6 @@ class myplugin_classname {
     public function plugins_loaded() {
         ##PLUGINS_LOADED##
     }
-
     ##METHODS##
 }
 
