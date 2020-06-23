@@ -12,6 +12,7 @@ git clone https://github.com/WordPressUtilities/WPUPluginCreator
 
 ## Road to MVP
 
+- [ ] Add an installer.
 - [ ] Add WPUBasePlugin as submodule for the tool.
 - [ ] Check if this is a WordPress plugin folder.
 - [ ] Ask the plugin name, generate Class Name & Project ID.
