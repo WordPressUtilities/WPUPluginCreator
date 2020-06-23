@@ -6,6 +6,7 @@ function wpuplugincreator_set_values(){
     file_content=${file_content//myplugin_name/${plugin_name}};
     file_content=${file_content//myplugin_id/${plugin_id}};
     file_content=${file_content//myplugin_lang/${translation_lang}};
+    file_content=${file_content//author_name/${author_name}};
     echo "${file_content}" > "${1}";
 }
 
