@@ -12,5 +12,10 @@ bashutilities_bury_copy "${_TOOLSDIR}translation.po" "${_TRANSLATION_FILE}";
 wpuplugincreator_set_values "${_TRANSLATION_FILE}";
 
 echo '# Load Translation file';
-translation_string="load_plugin_textdomain('myplugin_id', false, dirname(plugin_basename(__FILE__)) . '/lang/');";
-bashutilities_add_before_marker '##PLUGINS_LOADED##' "        ${translation_string}" "${_PLUGIN_FILE}";
+translation_string="";
+translation_string=$(cat <<EOF
+        # TRANSLATION
+        load_plugin_textdomain('myplugin_id', false, dirname(plugin_basename(__FILE__)) . '/lang/');
+EOF
+);
+bashutilities_add_before_marker '        ##PLUGINS_LOADED##' "${translation_string}" "${_PLUGIN_FILE}";

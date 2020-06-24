@@ -37,3 +37,9 @@ has_translation=$(bashutilities_get_yn "- Do you need to translate this plugin ?
 if [[ "${has_translation}" == 'y' ]];then
     translation_lang=$(bashutilities_get_user_var "- What is the translation lang?" "${translation_lang}");
 fi;
+
+###################################
+## Settings
+###################################
+
+has_settings=$(bashutilities_get_yn "- Do you need a settings page in this plugin ?" 'y');

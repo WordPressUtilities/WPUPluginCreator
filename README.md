@@ -26,9 +26,9 @@ Add CLI shortcut :
 ## Features
 
 - [x] Add translation (ask language).
+- [x] Add a settings page.
 - [ ] Register a post-type (ask id / name).
 - [ ] Register a taxonomy (ask id / name).
-- [ ] Add a settings page.
 - [ ] Add an admin page.
 - [ ] Add messages.
 - [ ] Add a plugin update option.

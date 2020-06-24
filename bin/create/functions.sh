@@ -20,3 +20,11 @@ function wpuplugincreator_remove_markers(){
     file_content=${file_content//${_indent1}"##METHODS##"/""};
     echo "${file_content}" > "${_PLUGIN_FILE}";
 }
+
+function wpuplugincreator_replace_namespace(){
+    _CURRENT_NAMESPACE=$(sed '2q;d' < "${1}");
+    _CURRENT_NAMESPACE=${_CURRENT_NAMESPACE//namespace/};
+    _CURRENT_NAMESPACE=${_CURRENT_NAMESPACE//;/};
+    _CURRENT_NAMESPACE=${_CURRENT_NAMESPACE// /};
+    bashutilities_sed "s/${_NAMESPACE}/${2}/g" "${1}";
+}
