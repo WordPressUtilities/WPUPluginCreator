@@ -24,9 +24,9 @@ settings_string=$(cat <<EOF
             'create_page' => true,
             'plugin_basename' => plugin_basename(__FILE__),
             # Default
-            'plugin_name' => 'myplugin_name',
-            'plugin_id' => 'myplugin_id',
-            'option_id' => 'myplugin_id_options',
+            'plugin_name' => \$this->plugin_settings['name'],
+            'plugin_id' => \$this->plugin_settings['id'],
+            'option_id' => \$this->plugin_settings['id'] . '_options',
             'sections' => array(
                 'import' => array(
                     'name' => __('Import Settings', 'myplugin_id')

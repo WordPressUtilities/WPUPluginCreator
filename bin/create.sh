@@ -18,6 +18,9 @@ fi;
 if [[ "${has_settings}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/settings.sh";
 fi;
+if [[ "${has_assets}" == 'y' ]];then
+    . "${_SOURCEDIR}bin/create/assets.sh";
+fi;
 
 ###################################
 ## Set values

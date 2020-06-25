@@ -26,5 +26,5 @@ function wpuplugincreator_replace_namespace(){
     _CURRENT_NAMESPACE=${_CURRENT_NAMESPACE//namespace/};
     _CURRENT_NAMESPACE=${_CURRENT_NAMESPACE//;/};
     _CURRENT_NAMESPACE=${_CURRENT_NAMESPACE// /};
-    bashutilities_sed "s/${_NAMESPACE}/${2}/g" "${1}";
+    bashutilities_sed "s/${_CURRENT_NAMESPACE}/${2}/g" "${1}";
 }

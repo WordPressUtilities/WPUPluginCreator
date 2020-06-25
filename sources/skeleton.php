@@ -12,7 +12,10 @@ License URI: http://opensource.org/licenses/MIT
 
 class myplugin_classname {
     private $plugin_version = '0.1.0';
-    private $plugin_id = 'myplugin_id';
+    private $plugin_settings = array(
+        'id' => 'myplugin_id',
+        'name' => 'myplugin_name'
+    );
     ##VARS##
 
     public function __construct() {

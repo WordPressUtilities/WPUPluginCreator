@@ -27,16 +27,16 @@ Add CLI shortcut :
 
 - [x] Add translation (ask language).
 - [x] Add a settings page.
+- [x] Load CSS in back-office.
+- [x] Load JS in back-office.
+- [x] Load CSS in front-office.
+- [x] Load JS in front-office.
 - [ ] Register a post-type (ask id / name).
 - [ ] Register a taxonomy (ask id / name).
 - [ ] Add an admin page.
 - [ ] Add messages.
 - [ ] Add a plugin update option.
 - [ ] Add a database option.
-- [ ] Load CSS in back-end.
-- [ ] Load JS in back-end.
-- [ ] Load CSS in front-end.
-- [ ] Load JS in front-end.
 - [ ] Unit tests.
 
 

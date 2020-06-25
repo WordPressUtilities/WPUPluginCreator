@@ -33,7 +33,7 @@ plugin_classname=$(bashutilities_get_user_var "- What is the plugin ClassName?" 
 ###################################
 
 translation_lang='fr_FR';
-has_translation=$(bashutilities_get_yn "- Do you need to translate this plugin ?" 'y');
+has_translation=$(bashutilities_get_yn "- Do you need translation ?" 'y');
 if [[ "${has_translation}" == 'y' ]];then
     translation_lang=$(bashutilities_get_user_var "- What is the translation lang?" "${translation_lang}");
 fi;
@@ -42,4 +42,16 @@ fi;
 ## Settings
 ###################################
 
-has_settings=$(bashutilities_get_yn "- Do you need a settings page in this plugin ?" 'y');
+has_settings=$(bashutilities_get_yn "- Do you need a settings page?" 'y');
+
+###################################
+## Assets
+###################################
+
+has_assets=$(bashutilities_get_yn "- Do you need CSS / JS assets ?" 'y');
+if [[ "${has_assets}" == 'y' ]];then
+    has_assets_front_js=$(bashutilities_get_yn "- JS in Front-Office ?" "y");
+    has_assets_back_js=$(bashutilities_get_yn "- JS in Back-Office ?" "y");
+    has_assets_front_css=$(bashutilities_get_yn "- CSS in Front-Office ?" "y");
+    has_assets_back_css=$(bashutilities_get_yn "- CSS in Back-Office ?" "y");
+fi;
