@@ -31,6 +31,7 @@ Add CLI shortcut :
 - [x] Load JS in back-office.
 - [x] Load CSS in front-office.
 - [x] Load JS in front-office.
+- [ ] Default content for generated CSS/JS assets (with placeholder replace).
 - [ ] Register a post-type (ask id / name).
 - [ ] Register a taxonomy (ask id / name).
 - [ ] Add an admin page.

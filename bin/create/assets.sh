@@ -23,7 +23,7 @@ EOF
     # Register JS
     assets_register_js="";
     if [[ "${has_assets_back_js}" == 'y' ]];then
-        touch "${_ASSETS_DIR}back.js";
+        cp "${_TOOLSDIR}assets/back.js" "${_ASSETS_DIR}back.js";
         assets_register_js=$(cat <<EOF
         /* Back Script */
         wp_register_script('myplugin_id_back_script', plugins_url('assets/back.js', __FILE__), array(), \$this->plugin_version, true);
@@ -35,7 +35,7 @@ EOF
     # Register CSS
     assets_register_css="";
     if [[ "${has_assets_back_css}" == 'y' ]];then
-        touch "${_ASSETS_DIR}back.css";
+        cp "${_TOOLSDIR}assets/back.css" "${_ASSETS_DIR}back.css";
         assets_register_css=$(cat <<EOF
         /* Back Style */
         wp_register_style('myplugin_id_back_style', plugins_url('assets/back.css', __FILE__), array(), \$this->plugin_version);
@@ -73,7 +73,7 @@ bashutilities_add_before_marker '        ##CONSTRUCT##' "${assets_register}" "${
     # Register JS
     assets_register_js="";
     if [[ "${has_assets_front_js}" == 'y' ]];then
-        touch "${_ASSETS_DIR}front.js";
+        cp "${_TOOLSDIR}assets/front.js" "${_ASSETS_DIR}front.js";
         assets_register_js=$(cat <<EOF
         /* Front Script with localization / variables */
         wp_register_script('myplugin_id_front_script', plugins_url('assets/front.js', __FILE__), array(), \$this->plugin_version, true);
@@ -88,7 +88,7 @@ EOF
     # Register CSS
     assets_register_css="";
     if [[ "${has_assets_front_css}" == 'y' ]];then
-        touch "${_ASSETS_DIR}front.css";
+        cp "${_TOOLSDIR}assets/front.css" "${_ASSETS_DIR}front.css";
         assets_register_css=$(cat <<EOF
         /* Front Style */
         wp_register_style('myplugin_id_front_style', plugins_url('assets/front.css', __FILE__), array(), \$this->plugin_version);
