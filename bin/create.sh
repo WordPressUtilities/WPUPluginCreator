@@ -18,6 +18,12 @@ fi;
 if [[ "${has_settings}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/settings.sh";
 fi;
+if [[ "${has_custom_table}" == 'y' ]];then
+    . "${_SOURCEDIR}bin/create/table.sh";
+fi;
+if [[ "${has_admin_page}" == 'y' ]];then
+    . "${_SOURCEDIR}bin/create/page.sh";
+fi;
 if [[ "${has_assets}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/assets.sh";
 fi;
@@ -33,3 +39,5 @@ wpuplugincreator_set_values "${_PLUGIN_FILE}";
 ###################################
 
 wpuplugincreator_remove_markers;
+
+echo "## Done !";

@@ -2,7 +2,7 @@
 
 WPUPluginCreator(){
 
-local _WPUPLUGINCREATOR_VERSION='0.3.1';
+local _WPUPLUGINCREATOR_VERSION='0.4.0';
 local _SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
 local _TOOLSDIR="${_SOURCEDIR}sources/";
 local _CURRENT_DIR="$( pwd )/";
@@ -15,6 +15,15 @@ if [[ ! -f "${_TOOLSDIR}BashUtilities/README.md" || ! -f "${_TOOLSDIR}wpubaseplu
     cd "${_SOURCEDIR}";
     git submodule update --init --recursive;
     cd "${_CURRENT_DIR}";
+fi;
+
+###################################
+## Test dir
+###################################
+
+_CURRENT_DIR_NAME="${PWD##*/}"
+if [[ "${_CURRENT_DIR_NAME}" != 'plugins' ]];then
+    echo $(bashutilities_message "Be careful, this doesnt look like a WordPress plugin folder" 'warning');
 fi;
 
 ###################################

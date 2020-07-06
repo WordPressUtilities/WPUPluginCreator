@@ -22,7 +22,12 @@ function wpuplugincreator_remove_markers(){
 }
 
 function wpuplugincreator_replace_namespace(){
+    # Try 2nd line
     _CURRENT_NAMESPACE=$(sed '2q;d' < "${1}");
+    # Try 3rd line
+    if [[ "${_CURRENT_NAMESPACE}" == '' ]];then
+        _CURRENT_NAMESPACE=$(sed '3q;d' < "${1}");
+    fi;
     _CURRENT_NAMESPACE=${_CURRENT_NAMESPACE//namespace/};
     _CURRENT_NAMESPACE=${_CURRENT_NAMESPACE//;/};
     _CURRENT_NAMESPACE=${_CURRENT_NAMESPACE// /};

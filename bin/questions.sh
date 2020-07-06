@@ -45,6 +45,24 @@ fi;
 has_settings=$(bashutilities_get_yn "- Do you need a settings page?" 'y');
 
 ###################################
+## Custom table
+###################################
+
+has_custom_table=$(bashutilities_get_yn "- Do you need a custom MySQL table ?" 'y');
+
+###################################
+## Admin page
+###################################
+
+has_admin_page=$(bashutilities_get_yn "- Do you need an admin page ?" 'y');
+
+###################################
+## Messages
+###################################
+
+has_messages=$(bashutilities_get_yn "- Do you need to handle notices & messages ?" 'y');
+
+###################################
 ## Assets
 ###################################
 

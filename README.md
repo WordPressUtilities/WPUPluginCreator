@@ -31,13 +31,13 @@ Add CLI shortcut :
 - [x] Load JS in back-office.
 - [x] Load CSS in front-office.
 - [x] Load JS in front-office.
+- [x] Add an admin page.
+- [x] Add a database option.
+- [x] Add messages.
 - [ ] Default content for generated CSS/JS assets (with placeholder replace).
 - [ ] Register a post-type (ask id / name).
 - [ ] Register a taxonomy (ask id / name).
-- [ ] Add an admin page.
-- [ ] Add messages.
 - [ ] Add a plugin update option.
-- [ ] Add a database option.
 - [ ] Unit tests.
 
 
