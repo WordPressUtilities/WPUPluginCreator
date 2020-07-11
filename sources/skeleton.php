@@ -25,6 +25,7 @@ class myplugin_classname {
 
     public function plugins_loaded() {
         ##PLUGINS_LOADED##
+        ##PLUGINS_END_LOADED##
     }
     ##METHODS##
 }

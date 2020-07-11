@@ -17,6 +17,7 @@ function wpuplugincreator_remove_markers(){
     file_content=${file_content//${_indent1}"##VARS##"/""};
     file_content=${file_content//${_indent2}"##CONSTRUCT##"/""};
     file_content=${file_content//${_indent2}"##PLUGINS_LOADED##"/""};
+    file_content=${file_content//${_indent2}"##PLUGINS_END_LOADED##"/""};
     file_content=${file_content//${_indent1}"##METHODS##"/""};
     echo "${file_content}" > "${_PLUGIN_FILE}";
 }
@@ -32,4 +33,12 @@ function wpuplugincreator_replace_namespace(){
     _CURRENT_NAMESPACE=${_CURRENT_NAMESPACE//;/};
     _CURRENT_NAMESPACE=${_CURRENT_NAMESPACE// /};
     bashutilities_sed "s/${_CURRENT_NAMESPACE}/${2}/g" "${1}";
+}
+
+function wpuplugincreator_create_inc(){
+    _INC_DIR="${_PLUGIN_DIR}inc/";
+    if [[ ! -d "${_INC_DIR}" ]];then
+        mkdir "${_INC_DIR}";
+        echo 'deny from all' > "${_INC_DIR}.htaccess";
+    fi;
 }

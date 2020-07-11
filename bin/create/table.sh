@@ -8,10 +8,7 @@ _CLASS_DIR="${_PLUGIN_DIR}inc/WPUBaseAdminDatas/";
 _CLASS_FILE="${_CLASS_DIR}WPUBaseAdminDatas.php";
 
 echo '# Create Custom Table file';
-_INC_DIR="${_PLUGIN_DIR}inc/";
-if [[ ! -d "${_INC_DIR}" ]];then
-    mkdir "${_INC_DIR}";
-fi;
+wpuplugincreator_create_inc;
 
 cp -R "${_TOOLSDIR}wpubaseplugin/inc/WPUBaseAdminDatas/" "${_CLASS_DIR}";
 
@@ -28,6 +25,7 @@ table_string=$(cat <<EOF
             'table_fields' => array(
                 'value' => array(
                     'public_name' => 'Value',
+                    'type' => 'sql',
                     'sql' => 'varchar(100) DEFAULT NULL'
                 )
             )

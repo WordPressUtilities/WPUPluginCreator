@@ -24,6 +24,9 @@ fi;
 if [[ "${has_admin_page}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/page.sh";
 fi;
+if [[ "${has_messages}" == 'y' ]];then
+    . "${_SOURCEDIR}bin/create/messages.sh";
+fi;
 if [[ "${has_assets}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/assets.sh";
 fi;

@@ -8,10 +8,7 @@ _CLASS_DIR="${_PLUGIN_DIR}inc/WPUBaseSettings/";
 _CLASS_FILE="${_CLASS_DIR}WPUBaseSettings.php";
 
 echo '# Create Settings file';
-_INC_DIR="${_PLUGIN_DIR}inc/";
-if [[ ! -d "${_INC_DIR}" ]];then
-    mkdir "${_INC_DIR}";
-fi;
+wpuplugincreator_create_inc;
 
 cp -R "${_TOOLSDIR}wpubaseplugin/inc/WPUBaseSettings/" "${_CLASS_DIR}";
 

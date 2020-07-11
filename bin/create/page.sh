@@ -8,10 +8,7 @@ _CLASS_DIR="${_PLUGIN_DIR}inc/WPUBaseAdminPage/";
 _CLASS_FILE="${_CLASS_DIR}WPUBaseAdminPage.php";
 
 echo '# Create Custom page file';
-_INC_DIR="${_PLUGIN_DIR}inc/";
-if [[ ! -d "${_INC_DIR}" ]];then
-    mkdir "${_INC_DIR}";
-fi;
+wpuplugincreator_create_inc;
 
 cp -R "${_TOOLSDIR}wpubaseplugin/inc/WPUBaseAdminPage/" "${_CLASS_DIR}";
 
@@ -25,10 +22,11 @@ page_string=$(cat <<EOF
         # CUSTOM PAGE
         \$admin_pages = array(
             'main' => array(
-                'menu_name' => 'Base plugin',
+                'icon_url' => 'dashicons-admin-generic',
+                'menu_name' => \$this->plugin_settings['name'],
                 'name' => 'Main page',
                 'settings_link' => true,
-                'settings_name' => 'Settings',
+                'settings_name' => __('Settings'),
                 'function_content' => array(&\$this,
                     'page_content__main'
                 ),

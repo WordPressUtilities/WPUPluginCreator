@@ -2,7 +2,7 @@
 
 WPUPluginCreator(){
 
-local _WPUPLUGINCREATOR_VERSION='0.4.0';
+local _WPUPLUGINCREATOR_VERSION='0.5.0';
 local _SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
 local _TOOLSDIR="${_SOURCEDIR}sources/";
 local _CURRENT_DIR="$( pwd )/";
@@ -18,15 +18,6 @@ if [[ ! -f "${_TOOLSDIR}BashUtilities/README.md" || ! -f "${_TOOLSDIR}wpubaseplu
 fi;
 
 ###################################
-## Test dir
-###################################
-
-_CURRENT_DIR_NAME="${PWD##*/}"
-if [[ "${_CURRENT_DIR_NAME}" != 'plugins' ]];then
-    echo $(bashutilities_message "Be careful, this doesnt look like a WordPress plugin folder" 'warning');
-fi;
-
-###################################
 ## Tools
 ###################################
 
@@ -37,12 +28,20 @@ fi;
 . "${_TOOLSDIR}BashUtilities/modules/git.sh";
 
 ###################################
+## Test dir
+###################################
+
+_CURRENT_DIR_NAME="${PWD##*/}"
+if [[ "${_CURRENT_DIR_NAME}" != 'plugins' ]];then
+    echo $(bashutilities_message "Be careful, this doesnt look like a WordPress plugin folder" 'warning');
+fi;
+
+###################################
 ## Start tool
 ###################################
 
 . "${_SOURCEDIR}bin/questions.sh";
 . "${_SOURCEDIR}bin/create.sh";
-
 
 }
 WPUPluginCreator "$@";
