@@ -34,8 +34,8 @@ Add CLI shortcut :
 - [x] Add an admin page.
 - [x] Add a database option.
 - [x] Add messages.
+- [~] Register a post-type (ask id / name).
 - [ ] Default content for generated CSS/JS assets (with placeholder replace).
-- [ ] Register a post-type (ask id / name).
 - [ ] Register a taxonomy (ask id / name).
 - [ ] Add a plugin update option.
 - [ ] Unit tests.

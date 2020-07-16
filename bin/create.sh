@@ -15,6 +15,9 @@ fi;
 if [[ "${has_translation}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/translation.sh";
 fi;
+if [[ "${has_post_type}" == 'y' ]];then
+    . "${_SOURCEDIR}bin/create/post_type.sh";
+fi;
 if [[ "${has_settings}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/settings.sh";
 fi;

@@ -39,6 +39,16 @@ if [[ "${has_translation}" == 'y' ]];then
 fi;
 
 ###################################
+## Post type
+###################################
+
+post_type_id="";
+has_post_type=$(bashutilities_get_yn "- Do you need a custom post type ?" 'y');
+if [[ "${has_post_type}" == 'y' ]];then
+    post_type_id=$(bashutilities_get_user_var "-- What is post type slug ?" "${plugin_id}");
+fi;
+
+###################################
 ## Settings
 ###################################
 
