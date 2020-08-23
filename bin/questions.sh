@@ -45,7 +45,7 @@ fi;
 post_type_id="";
 has_post_type=$(bashutilities_get_yn "- Do you need a custom post type ?" 'y');
 if [[ "${has_post_type}" == 'y' ]];then
-    post_type_id=$(bashutilities_get_user_var "-- What is post type slug ?" "${plugin_id}");
+    post_type_id=$(bashutilities_get_user_var "-- What is the post type slug ?" "${plugin_id}");
 fi;
 
 ###################################
@@ -71,6 +71,12 @@ has_admin_page=$(bashutilities_get_yn "- Do you need an admin page ?" 'y');
 ###################################
 
 has_messages=$(bashutilities_get_yn "- Do you need to handle notices & messages ?" 'y');
+
+###################################
+## Crontab
+###################################
+
+has_crontab=$(bashutilities_get_yn "- Do you need to add a crontab ?" 'y');
 
 ###################################
 ## Assets

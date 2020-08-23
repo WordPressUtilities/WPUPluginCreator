@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###################################
-## Settings
+## Messages
 ###################################
 
 _CLASS_DIR="${_PLUGIN_DIR}inc/WPUBaseMessages/";

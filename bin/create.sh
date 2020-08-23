@@ -30,6 +30,9 @@ fi;
 if [[ "${has_messages}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/messages.sh";
 fi;
+if [[ "${has_crontab}" == 'y' ]];then
+    . "${_SOURCEDIR}bin/create/crontab.sh";
+fi;
 if [[ "${has_assets}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/assets.sh";
 fi;
