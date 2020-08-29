@@ -10,7 +10,6 @@ if [[ -f "${_PLUGIN_DIR}" || -f "${_PLUGIN_FILE}" ]];then
     return 0;
 fi;
 
-. "${_SOURCEDIR}bin/create/functions.sh";
 . "${_SOURCEDIR}bin/create/file.sh";
 if [[ "${has_translation}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/translation.sh";
