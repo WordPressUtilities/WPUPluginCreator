@@ -38,8 +38,9 @@ settings_string=$(cat <<EOF
             )
         );
         include dirname(__FILE__) . '/inc/WPUBaseSettings/WPUBaseSettings.php';
-        new \myplugin_id\WPUBaseSettings(\$this->settings_details, \$this->settings);
+        \$this->settings_obj = new \myplugin_id\WPUBaseSettings(\$this->settings_details, \$this->settings);
 EOF
 );
 
 bashutilities_add_after_marker '##PLUGINS_LOADED##' "${settings_string}" "${_PLUGIN_FILE}";
+bashutilities_add_after_marker '##VARS##' "private \$settings_obj;" "${_PLUGIN_FILE}";
