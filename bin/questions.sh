@@ -76,7 +76,13 @@ has_messages=$(bashutilities_get_yn "- Do you need to handle notices & messages 
 ## Crontab
 ###################################
 
-has_crontab=$(bashutilities_get_yn "- Do you need to add a crontab ?" 'y');
+has_crontab=$(bashutilities_get_yn "- Do you need a crontab ?" 'y');
+
+###################################
+## WP-Cli
+###################################
+
+has_wpcli=$(bashutilities_get_yn "- Do you need a WP-Cli command ?" 'n');
 
 ###################################
 ## Assets

@@ -32,6 +32,9 @@ fi;
 if [[ "${has_crontab}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/crontab.sh";
 fi;
+if [[ "${has_wpcli}" == 'y' ]];then
+    . "${_SOURCEDIR}bin/create/wpcli.sh";
+fi;
 if [[ "${has_assets}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/assets.sh";
 fi;
