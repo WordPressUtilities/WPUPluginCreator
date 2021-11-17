@@ -1,7 +1,10 @@
 #!/bin/bash
 
 function wpuplugincreator_update_dependency(){
-    _CLASS_FILE="inc/${i}/${i}.php";
+    _CLASS_FILE="${i}/${i}.php";
+    if [[ -f "inc/${_CLASS_FILE}" ]];then
+        _CLASS_FILE="inc/${_CLASS_FILE}";
+    fi;
     if [[ ! -f "${_CLASS_FILE}" ]];then
         if [[ -f "inc/${i}.php" ]];then
             echo $(bashutilities_message "- “${i}” is installed but invalid !" 'error');
