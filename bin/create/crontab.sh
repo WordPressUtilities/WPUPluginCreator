@@ -7,7 +7,7 @@
 _CLASS_DIR="${_PLUGIN_DIR}inc/WPUBaseCron/";
 _CLASS_FILE="${_CLASS_DIR}WPUBaseCron.php";
 
-echo '# Create Messages file';
+echo '# Create Crontab files';
 wpuplugincreator_create_inc;
 
 cp -R "${_TOOLSDIR}wpubaseplugin/inc/WPUBaseCron/" "${_CLASS_DIR}";
