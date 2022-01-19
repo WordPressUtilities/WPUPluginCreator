@@ -24,3 +24,23 @@ EOF
 );
 
 bashutilities_add_after_marker '##PLUGINS_END_LOADED##' "${messages_string}" "${_PLUGIN_FILE}";
+bashutilities_add_after_marker '##VARS##' "private \$messages = false;" "${_PLUGIN_FILE}";
+
+###################################
+## Methods
+###################################
+
+page_string=$(cat <<EOF
+    /* Add a message */
+    public function set_message(\$id, \$message, \$group = '') {
+        if(!\$this->messages){
+            error_log(\$id . ' - ' . \$message);
+            return;
+        }
+        \$this->messages->set_message(\$id, \$message, \$group);
+    }
+EOF
+);
+
+
+bashutilities_add_after_marker '##METHODS##' "${page_string}" "${_PLUGIN_FILE}";
