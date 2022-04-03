@@ -39,7 +39,6 @@ function wpuplugincreator_update_dependency(){
     echo $(bashutilities_message "- “${i}” has been updated !" 'success');
 }
 
-_DEPENDENCY_LIST=("WPUBaseAdminDatas" "WPUBaseAdminPage" "WPUBaseCron" "WPUBaseMessages" "WPUBaseSettings" "WPUBaseUpdate");
 for i in "${_DEPENDENCY_LIST[@]}"; do
     echo $(bashutilities_message  "# Updating “${i}” if installed." 'notice' 'nowarn');
     wpuplugincreator_update_dependency "${i}";

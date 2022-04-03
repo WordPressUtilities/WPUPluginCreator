@@ -2,10 +2,11 @@
 
 WPUPluginCreator(){
 
-local _WPUPLUGINCREATOR_VERSION='0.10.2';
+local _WPUPLUGINCREATOR_VERSION='0.11.0';
 local _SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
 local _TOOLSDIR="${_SOURCEDIR}sources/";
 local _CURRENT_DIR="$( pwd )/";
+local _DEPENDENCY_LIST=("WPUBaseAdminDatas" "WPUBaseAdminPage" "WPUBaseCron" "WPUBaseMessages" "WPUBaseSettings" "WPUBaseUpdate");
 
 ###################################
 ## Test submodules
@@ -38,6 +39,9 @@ fi;
 ###################################
 
 case "${1}" in
+    'add')
+        . "${_SOURCEDIR}bin/add.sh";
+    ;;
     'update')
         . "${_SOURCEDIR}bin/update.sh";
     ;;
@@ -45,6 +49,9 @@ case "${1}" in
         . "${_SOURCEDIR}bin/check-create.sh";
         . "${_SOURCEDIR}bin/questions.sh";
         . "${_SOURCEDIR}bin/create.sh";
+    ;;
+    'src' )
+        cd "${_SOURCEDIR}";
     ;;
     'help' | *)
         . "${_SOURCEDIR}bin/help.sh";
