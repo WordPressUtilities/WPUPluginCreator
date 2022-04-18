@@ -11,6 +11,11 @@ function wpuplugincreator_add_dependency(){
     local _CLASS_DIR=$(dirname "${_CLASS_FILE}");
     local _CLASS_SRC_DIR="${_TOOLSDIR}wpubaseplugin/inc/${_CLASS_NAME}/";
 
+    # If inc/ directory exists : use it
+    if [[ -d "inc" ]];then
+        _CLASS_DIR="inc/${_CLASS_DIR}";
+    fi;
+
     # Add file
     cp -R "${_CLASS_SRC_DIR}" "${_CLASS_DIR}";
 
@@ -24,7 +29,6 @@ function wpuplugincreator_add_dependency(){
 
     echo $(bashutilities_message "- “${i}” has been installed !" 'success');
 }
-
 
 for i in "${_DEPENDENCY_LIST[@]}"; do
     _add_this_module=$(bashutilities_get_yn "- Install "${i}"?" 'n');
