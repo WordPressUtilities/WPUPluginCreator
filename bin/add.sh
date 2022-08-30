@@ -14,6 +14,7 @@ function wpuplugincreator_add_dependency(){
     # If inc/ directory exists : use it
     if [[ -d "inc" ]];then
         _CLASS_DIR="inc/${_CLASS_DIR}";
+        _CLASS_FILE="inc/${_CLASS_FILE}";
     fi;
 
     # Add file
