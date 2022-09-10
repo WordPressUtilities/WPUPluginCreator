@@ -15,12 +15,17 @@ cp -R "${_TOOLSDIR}wpubaseplugin/inc/WPUBaseCron/" "${_CLASS_DIR}";
 wpuplugincreator_replace_namespace "${_CLASS_FILE}" "${plugin_id}";
 
 loading_string=$(cat <<EOF
+        /* Include hooks */
         include dirname( __FILE__ ) . '/inc/WPUBaseCron/WPUBaseCron.php';
         \$this->basecron = new \myplugin_id\WPUBaseCron(array(
             'pluginname' => \$this->plugin_settings['name'],
             'cronhook' => 'myplugin_id__cron_hook',
-            'croninterval' => 360000
+            'croninterval' => 3600
         ));
+        /* Callback when hook is triggered by the cron */
+        add_action('myplugin_id__cron_hook', array(&\$this,
+            'myplugin_id__cron_hook'
+        ), 10);
 EOF
 );
 
