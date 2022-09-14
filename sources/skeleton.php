@@ -7,7 +7,7 @@ Version: 0.1.0
 Author: author_name
 Author URI: https://author_name.me/
 License: MIT License
-License URI: http://opensource.org/licenses/MIT
+License URI: https://opensource.org/licenses/MIT
 */
 
 class myplugin_classname {
