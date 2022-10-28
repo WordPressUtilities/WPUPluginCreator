@@ -2,6 +2,7 @@
 /*
 Plugin Name: myplugin_name
 Plugin URI: https://github.com/WordPressUtilities/myplugin_id
+Update URI: https://github.com/WordPressUtilities/myplugin_id
 Description: myplugin_name is a wonderful plugin.
 Version: 0.1.0
 Author: author_name

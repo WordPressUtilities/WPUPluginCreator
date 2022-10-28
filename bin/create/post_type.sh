@@ -29,4 +29,4 @@ EOF
 );
 
 
-bashutilities_add_before_marker '##METHODS##' "${methods_string}" "${_PLUGIN_FILE}";
+bashutilities_add_before_marker '    ##METHODS##' "${methods_string}" "${_PLUGIN_FILE}";
