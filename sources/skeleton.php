@@ -7,6 +7,8 @@ Description: myplugin_name is a wonderful plugin.
 Version: 0.1.0
 Author: author_name
 Author URI: https://author_name.me/
+Text Domain: myplugin_id
+Domain Path: /lang/
 License: MIT License
 License URI: https://opensource.org/licenses/MIT
 */

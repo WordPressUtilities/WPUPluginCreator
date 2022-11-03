@@ -78,7 +78,7 @@ bashutilities_add_before_marker '        ##CONSTRUCT##' "${assets_register}" "${
         /* Front Script with localization / variables */
         wp_register_script('myplugin_id_front_script', plugins_url('assets/front.js', __FILE__), array(), \$this->plugin_version, true);
         wp_localize_script('myplugin_id_front_script', 'myplugin_id_settings', array(
-            'my_key' => 'my_value'
+            'ajax_url' => admin_url('admin-ajax.php')
         ));
         wp_enqueue_script('myplugin_id_front_script');
 EOF

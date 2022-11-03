@@ -16,6 +16,7 @@ translation_string="";
 translation_string=$(cat <<EOF
         # TRANSLATION
         load_plugin_textdomain('myplugin_id', false, dirname(plugin_basename(__FILE__)) . '/lang/');
+        \$this->plugin_description = __('myplugin_name is a wonderful plugin.', 'myplugin_id');
 EOF
 );
 bashutilities_add_before_marker '        ##PLUGINS_LOADED##' "${translation_string}" "${_PLUGIN_FILE}";
