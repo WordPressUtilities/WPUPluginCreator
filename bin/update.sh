@@ -1,6 +1,36 @@
 #!/bin/bash
 
 ###################################
+## Update on main file
+###################################
+
+function wpuplugincreator_update_main_file(){
+    local _plugin_dir=$(basename "${_CURRENT_DIR}");
+    local _plugin_file="${_plugin_dir}.php";
+
+    # Check if main file exists
+    if [[ ! -f "${_plugin_file}" ]];then
+        return 0;
+    fi;
+
+    # Update loading method of textdomain
+    if ! grep -q load_muplugin_textdomain "${_plugin_file}" && grep -q load_plugin_textdomain "${_plugin_file}"; then
+        bashutilities_sed "s/load_plugin_textdomain.*/##marker_textdomain##/g" "${_plugin_file}";
+        local _content=$(cat << _content_
+\$lang_dir = dirname(plugin_basename(__FILE__)) . '/lang/';
+if (!load_plugin_textdomain('${_plugin_dir}', false, \$lang_dir)) {
+    load_muplugin_textdomain('${_plugin_dir}', \$lang_dir);
+}
+\$this->plugin_description = __('PLUGIN DESCRIPTION', '${_plugin_dir}');
+_content_
+);
+        bashutilities_add_after_marker '##marker_textdomain##' "${_content}" "${_plugin_file}";
+        bashutilities_sed "s/##marker_textdomain##//g" "${_plugin_file}";
+    fi
+}
+wpuplugincreator_update_main_file;
+
+###################################
 ## Dependencies
 ###################################
 
