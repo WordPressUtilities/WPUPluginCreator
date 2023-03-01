@@ -15,7 +15,7 @@ function wpuplugincreator_update_main_file(){
 
     # Update loading method of textdomain
     if ! grep -q load_muplugin_textdomain "${_plugin_file}" && grep -q load_plugin_textdomain "${_plugin_file}"; then
-        bashutilities_sed "s/load_plugin_textdomain.*/##marker_textdomain##/g" "${_plugin_file}";
+        bashutilities_sed "s/load_plugin_textdomain('.*/##marker_textdomain##/g" "${_plugin_file}";
         local _content=$(cat << _content_
 \$lang_dir = dirname(plugin_basename(__FILE__)) . '/lang/';
 if (!load_plugin_textdomain('${_plugin_dir}', false, \$lang_dir)) {
@@ -26,7 +26,49 @@ _content_
 );
         bashutilities_add_after_marker '##marker_textdomain##' "${_content}" "${_plugin_file}";
         bashutilities_sed "s/##marker_textdomain##//g" "${_plugin_file}";
+        echo '- Update lang loading method.'
     fi
+
+    # Put Update URI if missing
+    if ! grep -q "Update URI" "${_plugin_file}" && grep -q "Plugin URI" "${_plugin_file}"; then
+        # Find line containing the Plugin URI
+        local _update_string=$(grep 'Plugin URI' "${_plugin_file}");
+        # Replace name by Update URI
+        local _new_update_string="${_update_string/Plugin URI/Update URI}"
+        # Insert it after the original
+        bashutilities_add_after_marker "${_update_string}" "${_new_update_string}" "${_plugin_file}";
+        echo '- Add missing Update URI.'
+    fi
+
+    # Put Text Domain if missing
+    if ! grep -q "Text Domain" "${_plugin_file}" && grep -q "License" "${_plugin_file}"; then
+        # Insert it before License
+        bashutilities_add_before_marker "License:" "Text Domain: ${_plugin_dir}" "${_plugin_file}";
+        echo '- Add missing Text Domain.'
+    fi
+
+    # Put Domain Path if missing
+    if ! grep -q "Domain Path" "${_plugin_file}" && grep -q "License" "${_plugin_file}" && [[ -f "lang/${_plugin_dir}-fr_FR.po" ]]; then
+        # Insert it before License
+        bashutilities_add_before_marker "License:" "Domain Path: /lang" "${_plugin_file}";
+        echo '- Add missing Domain Path.'
+    fi
+
+    # Put Requires version if missing
+    if ! grep -q "Requires at least" "${_plugin_file}" && grep -q "License" "${_plugin_file}"; then
+        # Insert it before License
+        bashutilities_add_before_marker "License:" "Requires at least: 6.0" "${_plugin_file}";
+        echo '- Add missing Requires at least.'
+    fi
+
+    # Put Requires PHP if missing
+    if ! grep -q "Requires PHP" "${_plugin_file}" && grep -q "License" "${_plugin_file}"; then
+        # Insert it before License
+        bashutilities_add_before_marker "License:" "Requires PHP: 8.0" "${_plugin_file}";
+        echo '- Add missing Requires PHP.'
+    fi
+
+
 }
 wpuplugincreator_update_main_file;
 
