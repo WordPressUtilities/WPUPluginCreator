@@ -2,11 +2,25 @@
 
 echo '## Create';
 
-_PLUGIN_DIR="${_CURRENT_DIR}/${plugin_id}/";
-_PLUGIN_FILE="${_PLUGIN_DIR}${plugin_id}.php";
+_ERROR_PLUGIN_EXISTS=$(bashutilities_message "The plugin “${plugin_id}” already exists !" 'error');
 
-if [[ -f "${_PLUGIN_DIR}" || -f "${_PLUGIN_FILE}" ]];then
-    echo $(bashutilities_message "The plugin “${plugin_id}” already exists !" 'error');
+# Build dir
+_PLUGIN_DIR="${_CURRENT_DIR}/${plugin_id}/";
+if [[ "${PWD##*/}" == "${plugin_id}" ]];then
+    _PLUGIN_DIR="${_CURRENT_DIR}/";
+else
+    if [[ -d "${_PLUGIN_DIR}" ]];then
+        echo "${_ERROR_PLUGIN_EXISTS}";
+        return 0;
+    else
+        mkdir "${_PLUGIN_DIR}";
+    fi;
+fi;
+
+# Build file
+_PLUGIN_FILE="${_PLUGIN_DIR}${plugin_id}.php";
+if [[ -f "${_PLUGIN_FILE}" ]];then
+    echo "${_ERROR_PLUGIN_EXISTS}";
     return 0;
 fi;
 
