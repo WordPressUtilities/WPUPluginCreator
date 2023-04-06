@@ -52,6 +52,9 @@ fi;
 if [[ "${has_assets}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/assets.sh";
 fi;
+if [[ "${has_api}" == 'y' ]];then
+    . "${_SOURCEDIR}bin/create/api.sh";
+fi;
 
 ###################################
 ## Set values

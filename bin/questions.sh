@@ -82,12 +82,6 @@ has_messages=$(bashutilities_get_yn "- Do you need to handle notices & messages 
 has_crontab=$(bashutilities_get_yn "- Do you need a crontab ?" 'y');
 
 ###################################
-## WP-Cli
-###################################
-
-has_wpcli=$(bashutilities_get_yn "- Do you need a WP-Cli command ?" 'n');
-
-###################################
 ## Assets
 ###################################
 
@@ -98,3 +92,15 @@ if [[ "${has_assets}" == 'y' ]];then
     has_assets_front_css=$(bashutilities_get_yn "-- CSS in Front-Office ?" "y");
     has_assets_back_css=$(bashutilities_get_yn "-- CSS in Back-Office ?" "y");
 fi;
+
+###################################
+## API
+###################################
+
+has_api=$(bashutilities_get_yn "- Do you need to call an external API ?" 'n');
+
+###################################
+## WP-Cli
+###################################
+
+has_wpcli=$(bashutilities_get_yn "- Do you need a WP-Cli command ?" 'n');
