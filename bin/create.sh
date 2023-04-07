@@ -54,6 +54,9 @@ if [[ "${has_assets}" == 'y' ]];then
 fi;
 if [[ "${has_api}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/api.sh";
+    if [[ "${has_api_xml}" == 'y' ]];then
+        . "${_SOURCEDIR}bin/create/api_xml.sh";
+    fi;
 fi;
 
 ###################################

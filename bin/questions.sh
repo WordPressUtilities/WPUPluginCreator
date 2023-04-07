@@ -98,6 +98,9 @@ fi;
 ###################################
 
 has_api=$(bashutilities_get_yn "- Do you need to call an external API ?" 'n');
+if [[ "${has_api}" == 'y' ]];then
+    has_api_xml=$(bashutilities_get_yn "- Do you need to parse XML ?" 'n');
+fi;
 
 ###################################
 ## WP-Cli
