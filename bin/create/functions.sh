@@ -39,6 +39,11 @@ function wpuplugincreator_create_inc(){
     _INC_DIR="${_PLUGIN_DIR}inc/";
     if [[ ! -d "${_INC_DIR}" ]];then
         mkdir "${_INC_DIR}";
-        echo 'deny from all' > "${_INC_DIR}.htaccess";
+        cat <<EOT >> "${_INC_DIR}.htaccess";
+deny from all
+<FilesMatch "(^$)|(\.(css|js)$)">
+    Allow From All
+</FilesMatch>
+EOT
     fi;
 }
