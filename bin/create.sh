@@ -28,6 +28,9 @@ fi;
 if [[ "${has_translation}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/translation.sh";
 fi;
+if [[ "${has_github_actions}" == 'y' ]];then
+    wpuplugincreator_create_github_actions;
+fi;
 if [[ "${has_post_type}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/post_type.sh";
 fi;

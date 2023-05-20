@@ -47,3 +47,23 @@ deny from all
 EOT
     fi;
 }
+
+function wpuplugincreator_create_github_actions(){
+    if [[ -d ".github/" ]];then
+        return 0;
+    fi;
+
+    local _hasgithub;
+    if git remote get-url origin | grep -q github.com; then
+      _hasgithub="1"
+    else
+      return 0;
+    fi
+
+    mkdir "${_PLUGIN_DIR}.github";
+    mkdir "${_PLUGIN_DIR}.github/workflows/";
+    echo "deny from all" > "${_PLUGIN_DIR}.github/.htaccess";
+    cp "${_TOOLSDIR}github-actions-php.yml" "${_PLUGIN_DIR}.github/workflows/php.yml";
+    echo '- Added github actions.';
+    echo 'Do not forget to go to the actions settings to disable PR approval for actions.';
+}

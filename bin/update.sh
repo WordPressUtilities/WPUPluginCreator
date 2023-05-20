@@ -29,6 +29,12 @@ _content_
         echo '- Update lang loading method.'
     fi
 
+    # Github actions
+    local has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
+    if [[ "${has_github_actions}" == 'y' ]];then
+        wpuplugincreator_create_github_actions;
+    fi;
+
     # Put Update URI if missing
     if ! grep -q "Update URI" "${_plugin_file}" && grep -q "Plugin URI" "${_plugin_file}"; then
         # Find line containing the Plugin URI

@@ -52,6 +52,12 @@ if [[ "${has_post_type}" == 'y' ]];then
 fi;
 
 ###################################
+## Github actions
+###################################
+
+has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
+
+###################################
 ## Fields
 ###################################
 
