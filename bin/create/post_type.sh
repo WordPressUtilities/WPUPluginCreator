@@ -20,7 +20,7 @@ methods_string=$(cat <<EOF
         # POST TYPE
         register_post_type('${post_type_id}', array(
             'public' => true,
-            'label' => __('${post_type_id}', 'plugin_id'),
+            'label' => __('${post_type_id}', 'myplugin_id'),
             'menu_icon' => 'dashicons-book'
         ));
     }
