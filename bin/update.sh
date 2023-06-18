@@ -4,6 +4,28 @@
 ## Update on main file
 ###################################
 
+# Helper for version
+
+function wpuplugincreator_update_main_file_version_replace(){
+    # Put Requires version if missing
+    local _search_str="${1}";
+    local _latest_version="${2}";
+    local _plugin_file="${3}";
+
+    if ! grep -q "${_search_str}" "${_plugin_file}" && grep -q "License:" "${_plugin_file}"; then
+        # Insert it before License
+        bashutilities_add_before_marker "License:" "${_search_str}: ${_latest_version}" "${_plugin_file}";
+        echo "- Add missing '${_search_str}'."
+    fi
+    # Check latest version
+    _req_version=$(bashutilities_search_extract_file "${_search_str}:" "" "${_plugin_file}");
+    if [[ "${_req_version}" != "" &&  "${_req_version}" != "${_latest_version}" ]];then
+        bashutilities_sed "s/${_search_str}: ${_req_version}/${_search_str}: ${_latest_version}/g" "${_plugin_file}";
+    fi;
+}
+
+# Main function
+
 function wpuplugincreator_update_main_file(){
     local _plugin_dir=$(basename "${_CURRENT_DIR}");
     local _plugin_file="${_plugin_dir}.php";
@@ -47,33 +69,18 @@ _content_
     fi
 
     # Put Text Domain if missing
-    if ! grep -q "Text Domain" "${_plugin_file}" && grep -q "License" "${_plugin_file}"; then
-        # Insert it before License
-        bashutilities_add_before_marker "License:" "Text Domain: ${_plugin_dir}" "${_plugin_file}";
-        echo '- Add missing Text Domain.'
-    fi
+    wpuplugincreator_update_main_file_version_replace "Text Domain" "${_plugin_dir}" "${_plugin_file}";
 
     # Put Domain Path if missing
-    if ! grep -q "Domain Path" "${_plugin_file}" && grep -q "License" "${_plugin_file}" && [[ -f "lang/${_plugin_dir}-fr_FR.po" ]]; then
-        # Insert it before License
-        bashutilities_add_before_marker "License:" "Domain Path: /lang" "${_plugin_file}";
-        echo '- Add missing Domain Path.'
+    if [[ -f "lang/${_plugin_dir}-fr_FR.po" ]]; then
+        wpuplugincreator_update_main_file_version_replace "Domain Path" "/lang" "${_plugin_file}";
     fi
 
-    # Put Requires version if missing
-    if ! grep -q "Requires at least" "${_plugin_file}" && grep -q "License" "${_plugin_file}"; then
-        # Insert it before License
-        bashutilities_add_before_marker "License:" "Requires at least: 6.0" "${_plugin_file}";
-        echo '- Add missing Requires at least.'
-    fi
+    # Add required WordPress version
+    wpuplugincreator_update_main_file_version_replace "Requires at least" "6.2" "${_plugin_file}";
 
-    # Put Requires PHP if missing
-    if ! grep -q "Requires PHP" "${_plugin_file}" && grep -q "License" "${_plugin_file}"; then
-        # Insert it before License
-        bashutilities_add_before_marker "License:" "Requires PHP: 8.0" "${_plugin_file}";
-        echo '- Add missing Requires PHP.'
-    fi
-
+    # Add PHP Version
+    wpuplugincreator_update_main_file_version_replace "Requires PHP" "8.0" "${_plugin_file}";
 
 }
 wpuplugincreator_update_main_file;
