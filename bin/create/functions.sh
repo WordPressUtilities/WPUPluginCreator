@@ -60,10 +60,13 @@ function wpuplugincreator_create_github_actions(){
       return 0;
     fi
 
+    default_branch_name=$(git rev-parse --abbrev-ref HEAD);
+
     mkdir "${_PLUGIN_DIR}.github";
     mkdir "${_PLUGIN_DIR}.github/workflows/";
     echo "deny from all" > "${_PLUGIN_DIR}.github/.htaccess";
     cp "${_TOOLSDIR}github-actions-php.yml" "${_PLUGIN_DIR}.github/workflows/php.yml";
+    bashutilities_sed "s/default_branch_name/${default_branch_name}/g" "${_PLUGIN_DIR}.github/workflows/php.yml";
     echo '- Added github actions.';
     echo 'Do not forget to go to the actions settings to disable PR approval for actions.';
 }
