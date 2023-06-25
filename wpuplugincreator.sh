@@ -2,7 +2,7 @@
 
 WPUPluginCreator(){
 
-local _WPUPLUGINCREATOR_VERSION='0.19.1';
+local _WPUPLUGINCREATOR_VERSION='0.19.2';
 local _SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
 local _TOOLSDIR="${_SOURCEDIR}sources/";
 local _CURRENT_DIR="$( pwd )/";
@@ -58,6 +58,8 @@ case "${1}" in
     ;;
 esac
 
+. "${_SOURCEDIR}bin/stop.sh";
+. "${_TOOLSDIR}BashUtilities/modules/stop.sh";
 
 }
 WPUPluginCreator "$@";
