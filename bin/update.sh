@@ -20,7 +20,7 @@ function wpuplugincreator_update_main_file_version_replace(){
     # Check latest version
     _req_version=$(bashutilities_search_extract_file "${_search_str}:" "" "${_plugin_file}");
     if [[ "${_req_version}" != "" &&  "${_req_version}" != "${_latest_version}" ]];then
-        bashutilities_sed "s/${_search_str}: ${_req_version}/${_search_str}: ${_latest_version}/g" "${_plugin_file}";
+        bashutilities_sed "s#${_search_str}: ${_req_version}#${_search_str}: ${_latest_version}#g" "${_plugin_file}";
     fi;
 }
 
@@ -52,9 +52,13 @@ _content_
     fi
 
     # Github actions
-    local has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
-    if [[ "${has_github_actions}" == 'y' ]];then
-        wpuplugincreator_create_github_actions;
+    if [[ ! -f ".github/workflows/php.yml" ]];then
+        local has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
+        if [[ "${has_github_actions}" == 'y' ]];then
+            wpuplugincreator_create_github_actions;
+        fi;
+    else
+        echo $(bashutilities_message  "- Github actions are already installed." 'success' 'nowarn');
     fi;
 
     # Put Update URI if missing
