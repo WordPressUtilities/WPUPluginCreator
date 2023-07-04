@@ -6,7 +6,7 @@ Update URI: https://github.com/WordPressUtilities/myplugin_id
 Description: myplugin_name is a wonderful plugin.
 Version: 0.1.0
 Author: author_name
-Author URI: https://author_name.me/
+Author URI: https://author_id.me/
 Text Domain: myplugin_id
 Domain Path: /lang/
 License: MIT License

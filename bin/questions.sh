@@ -7,6 +7,7 @@ echo '## Questions';
 ###################################
 
 author_name=$(bashutilities_get_user_var "- What is the author Name ?" "$(whoami)");
+author_id=$(echo "${author_name}" | tr '[:upper:]' '[:lower:]');
 
 ###################################
 ## Name
