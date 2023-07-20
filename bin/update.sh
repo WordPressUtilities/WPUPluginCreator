@@ -4,6 +4,20 @@
 ## Update on main file
 ###################################
 
+# Uninstall
+
+function wpuplugincreator_update_uninstall(){
+    local _uninstall_file='uninstall.php';
+    if [[ -f "${_uninstall_file}" ]];then
+        echo $(bashutilities_message  "- There is already an uninstall file." 'success' 'nowarn');
+        return 0;
+    fi;
+    local _plugin_id="${1}";
+    bashutilities_bury_copy "${_TOOLSDIR}uninstall.php" "${_uninstall_file}";
+    bashutilities_sed "s/wpuplugincreatorpluginid/${_plugin_id}/g" "${_uninstall_file}";
+    echo $(bashutilities_message  "- Uninstall file has been installed." 'success' 'nowarn');
+}
+
 # Helper for version
 
 function wpuplugincreator_update_main_file_version_replace(){
@@ -85,6 +99,9 @@ _content_
 
     # Add PHP Version
     wpuplugincreator_update_main_file_version_replace "Requires PHP" "8.0" "${_plugin_file}";
+
+    # Uninstall
+    wpuplugincreator_update_uninstall "${_plugin_dir}";
 
 }
 wpuplugincreator_update_main_file;
