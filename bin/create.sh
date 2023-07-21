@@ -55,6 +55,9 @@ fi;
 if [[ "${has_assets}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/assets.sh";
 fi;
+if [[ "${has_uninstall}" == 'y' ]];then
+    . "${_SOURCEDIR}bin/create/uninstall.sh";
+fi;
 if [[ "${has_api}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/api.sh";
     if [[ "${has_api_xml}" == 'y' ]];then

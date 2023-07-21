@@ -95,6 +95,12 @@ has_messages=$(bashutilities_get_yn "- Do you need to handle notices & messages 
 has_crontab=$(bashutilities_get_yn "- Do you need a crontab ?" 'y');
 
 ###################################
+## Uninstall
+###################################
+
+has_uninstall=$(bashutilities_get_yn "- Do you need an uninstall file ?" 'y');
+
+###################################
 ## Assets
 ###################################
 
