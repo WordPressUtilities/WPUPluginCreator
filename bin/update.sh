@@ -61,6 +61,15 @@ _content_
         echo $(bashutilities_message  "- Github actions are already installed." 'success' 'nowarn');
     fi;
 
+    # Check http
+    if grep -q "http:" "${_plugin_file}";then
+        local need_http_replace=$(bashutilities_get_yn "- Do you want to replace http by https ?" 'y');
+        if [[ "${need_http_replace}" == 'y' ]];then
+            bashutilities_sed "s/http:/https:/g" "${_plugin_file}";
+            echo '- Replace http by https.'
+        fi;
+    fi;
+
     # Put Update URI if missing
     if ! grep -q "Update URI" "${_plugin_file}" && grep -q "Plugin URI" "${_plugin_file}"; then
         # Find line containing the Plugin URI

@@ -69,7 +69,12 @@ function wpuplugincreator_create_github_actions(){
     cp "${_TOOLSDIR}github-actions-php.yml" "${_PLUGIN_DIR}.github/workflows/php.yml";
     bashutilities_sed "s/default_branch_name/${default_branch_name}/g" "${_PLUGIN_DIR}.github/workflows/php.yml";
     echo '- Added github actions.';
-    echo 'Do not forget to go to the actions settings to disable PR approval for actions.';
+    echo 'Do not forget to go to the actions settings to disable PR approval for actions:';
+    local _remote_github=$(git config --get remote.origin.url);
+    _remote_github=${_remote_github/\.git/\/settings\/actions};
+    _remote_github=${_remote_github/git\@github/https\:\/\/github};
+    _remote_github=${_remote_github/github.com\:/github\.com\/};
+    echo "${_remote_github}";
 }
 
 # Uninstall
