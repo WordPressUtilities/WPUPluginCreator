@@ -101,6 +101,12 @@ has_crontab=$(bashutilities_get_yn "- Do you need a crontab ?" 'y');
 has_uninstall=$(bashutilities_get_yn "- Do you need an uninstall file ?" 'y');
 
 ###################################
+## Email
+###################################
+
+has_email=$(bashutilities_get_yn "- Do you need to send emails ?" 'y');
+
+###################################
 ## Assets
 ###################################
 
