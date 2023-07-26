@@ -2,8 +2,12 @@
 
 function wpuplugincreator_add_dependency(){
     local _CLASS_FILE="${i}/${i}.php";
-    if [[ -f "inc/${_CLASS_FILE}" ]];then
-        echo $(bashutilities_message "- “${i}” is already installed !" 'error');
+    if [[ -f "inc/${_CLASS_FILE}" || -f "inc/${i}.php" ]];then
+        return 0;
+    fi;
+
+    local _add_this_module=$(bashutilities_get_yn "- Install "${i}"?" 'n');
+    if [[ "${_add_this_module}" != 'y' ]];then
         return 0;
     fi;
 
@@ -32,8 +36,5 @@ function wpuplugincreator_add_dependency(){
 }
 
 for i in "${_DEPENDENCY_LIST[@]}"; do
-    _add_this_module=$(bashutilities_get_yn "- Install "${i}"?" 'n');
-    if [[ "${_add_this_module}" == 'y' ]];then
-        wpuplugincreator_add_dependency "${i}";
-    fi;
+    wpuplugincreator_add_dependency "${i}";
 done;
