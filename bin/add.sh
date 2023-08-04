@@ -38,3 +38,8 @@ function wpuplugincreator_add_dependency(){
 for i in "${_DEPENDENCY_LIST[@]}"; do
     wpuplugincreator_add_dependency "${i}";
 done;
+
+wpuplugincreator_has_github_actions=$(bashutilities_get_yn "- Install Github Actions ?" 'y');
+if [[ "${wpuplugincreator_has_github_actions}" == 'y' ]];then
+    wpuplugincreator_create_github_actions;
+fi;
