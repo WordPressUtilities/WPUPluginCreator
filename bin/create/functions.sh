@@ -50,31 +50,55 @@ EOT
 }
 
 function wpuplugincreator_create_github_actions(){
-    if [[ -d ".github/" ]];then
-        return 0;
-    fi;
-
     local _hasgithub;
+    local _default_branch_name;
+    local _remote_github;
+    local _new_action;
     if git remote get-url origin | grep -q github.com; then
       _hasgithub="1"
     else
       return 0;
     fi
 
-    default_branch_name=$(git rev-parse --abbrev-ref HEAD);
+    _default_branch_name=$(git rev-parse --abbrev-ref HEAD);
 
-    mkdir "${_PLUGIN_DIR}.github";
-    mkdir "${_PLUGIN_DIR}.github/workflows/";
-    echo "deny from all" > "${_PLUGIN_DIR}.github/.htaccess";
-    cp "${_TOOLSDIR}github-actions-php.yml" "${_PLUGIN_DIR}.github/workflows/php.yml";
-    bashutilities_sed "s/default_branch_name/${default_branch_name}/g" "${_PLUGIN_DIR}.github/workflows/php.yml";
-    echo '- Added github actions.';
-    echo 'Do not forget to go to the actions settings to disable PR approval for actions:';
-    local _remote_github=$(git config --get remote.origin.url);
-    _remote_github=${_remote_github/\.git/\/settings\/actions};
-    _remote_github=${_remote_github/git\@github/https\:\/\/github};
-    _remote_github=${_remote_github/github.com\:/github\.com\/};
-    echo "${_remote_github}";
+    # Folder
+    if [[ ! -d ".github/" ]];then
+        mkdir "${_PLUGIN_DIR}.github";
+        mkdir "${_PLUGIN_DIR}.github/workflows/";
+        echo "deny from all" > "${_PLUGIN_DIR}.github/.htaccess";
+    fi;
+
+    # PHP
+    local _php_file="${_PLUGIN_DIR}.github/workflows/php.yml";
+    if [[ ! -f "${_php_file}" ]];then
+        _new_action='1';
+        cp "${_TOOLSDIR}github-actions-php.yml" "${_php_file}";
+        bashutilities_sed "s/default_branch_name/${_default_branch_name}/g" "${_php_file}";
+        echo '- Added PHP github actions.';
+    fi;
+
+    # JS
+    if [[ -d "${_PLUGIN_DIR}assets" ]];then
+        local _js_file="${_PLUGIN_DIR}.github/workflows/js.yml";
+        if [[ ! -f "${_js_file}" ]];then
+            _new_action='1';
+            cp "${_TOOLSDIR}eslint.json" "${_PLUGIN_DIR}.eslintrc.json";
+            cp "${_TOOLSDIR}github-actions-js.yml" "${_js_file}";
+            bashutilities_sed "s/default_branch_name/${_default_branch_name}/g" "${_js_file}";
+            echo '- Added JS github actions.';
+        fi;
+    fi;
+
+    # Confirm
+    if [[ "${_new_action}" == '1' ]];then
+        echo 'Do not forget to go to the actions settings to disable PR approval for actions:';
+        _remote_github=$(git config --get remote.origin.url);
+        _remote_github=${_remote_github/\.git/\/settings\/actions};
+        _remote_github=${_remote_github/git\@github/https\:\/\/github};
+        _remote_github=${_remote_github/github.com\:/github\.com\/};
+        echo "${_remote_github}";
+    fi;
 }
 
 # Uninstall

@@ -52,7 +52,7 @@ _content_
     fi
 
     # Github actions
-    if [[ ! -f ".github/workflows/php.yml" ]];then
+    if [[ ! -f ".github/workflows/php.yml" || ! -f ".github/workflows/js.yml" ]];then
         local has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
         if [[ "${has_github_actions}" == 'y' ]];then
             wpuplugincreator_create_github_actions;
