@@ -107,6 +107,12 @@ has_uninstall=$(bashutilities_get_yn "- Do you need an uninstall file ?" 'y');
 has_email=$(bashutilities_get_yn "- Do you need to send emails ?" 'y');
 
 ###################################
+## Toolbox
+###################################
+
+has_toolbox=$(bashutilities_get_yn "- Do you need some functions from the toolbox ?" 'y');
+
+###################################
 ## Assets
 ###################################
 

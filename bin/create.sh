@@ -61,6 +61,9 @@ fi;
 if [[ "${has_email}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/email.sh";
 fi;
+if [[ "${has_toolbox}" == 'y' ]];then
+    . "${_SOURCEDIR}bin/create/toolbox.sh";
+fi;
 if [[ "${has_api}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/api.sh";
     if [[ "${has_api_xml}" == 'y' ]];then

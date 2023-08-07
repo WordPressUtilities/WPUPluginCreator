@@ -7,7 +7,7 @@
 _CLASS_DIR="${_PLUGIN_DIR}inc/WPUBaseEmail/";
 _CLASS_FILE="${_CLASS_DIR}WPUBaseEmail.php";
 
-echo '# Nice methods to send emails';
+echo '# Add emails';
 wpuplugincreator_create_inc;
 
 cp -R "${_TOOLSDIR}wpubaseplugin/inc/WPUBaseEmail/" "${_CLASS_DIR}";
@@ -15,7 +15,7 @@ cp -R "${_TOOLSDIR}wpubaseplugin/inc/WPUBaseEmail/" "${_CLASS_DIR}";
 wpuplugincreator_replace_namespace "${_CLASS_FILE}" "${plugin_id}";
 
 email_string=$(cat <<EOF
-        # CUSTOM TABLE
+        # EMAIL
         include dirname(__FILE__) . '/inc/WPUBaseEmail/WPUBaseEmail.php';
         \$this->baseemail = new \myplugin_id\WPUBaseEmail();
 EOF
