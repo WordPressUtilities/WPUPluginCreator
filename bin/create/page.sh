@@ -48,6 +48,7 @@ EOF
 );
 
 bashutilities_add_after_marker '##PLUGINS_LOADED##' "${page_string}" "${_PLUGIN_FILE}";
+bashutilities_add_after_marker '##VARS##' "private \$adminpages;" "${_PLUGIN_FILE}";
 
 ###################################
 ## Methods

@@ -22,3 +22,4 @@ translation_string=$(cat <<EOF
 EOF
 );
 bashutilities_add_before_marker '        ##PLUGINS_LOADED##' "${translation_string}" "${_PLUGIN_FILE}";
+bashutilities_add_after_marker '##VARS##' "private \$plugin_description;" "${_PLUGIN_FILE}";

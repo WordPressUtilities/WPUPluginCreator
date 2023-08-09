@@ -44,3 +44,4 @@ EOF
 
 
 bashutilities_add_after_marker '##METHODS##' "${page_string}" "${_PLUGIN_FILE}";
+bashutilities_add_after_marker '##VARS##' "private \$messages;" "${_PLUGIN_FILE}";

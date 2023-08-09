@@ -22,3 +22,4 @@ EOF
 );
 
 bashutilities_add_after_marker '##PLUGINS_LOADED##' "${toolbox_string}" "${_PLUGIN_FILE}";
+bashutilities_add_after_marker '##VARS##' "private \$basetoolbox;" "${_PLUGIN_FILE}";

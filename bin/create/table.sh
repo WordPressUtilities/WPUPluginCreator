@@ -34,3 +34,4 @@ EOF
 );
 
 bashutilities_add_after_marker '##PLUGINS_LOADED##' "${table_string}" "${_PLUGIN_FILE}";
+bashutilities_add_after_marker '##VARS##' "private \$baseadmindatas;" "${_PLUGIN_FILE}";

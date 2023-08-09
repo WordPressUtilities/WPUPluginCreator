@@ -46,3 +46,4 @@ EOF
 
 
 bashutilities_add_after_marker '##METHODS##' "${methods_string}" "${_PLUGIN_FILE}";
+bashutilities_add_after_marker '##VARS##' "private \$basecron;" "${_PLUGIN_FILE}";

@@ -43,4 +43,6 @@ EOF
 );
 
 bashutilities_add_after_marker '##PLUGINS_LOADED##' "${settings_string}" "${_PLUGIN_FILE}";
+bashutilities_add_after_marker '##VARS##' "private \$settings_details;" "${_PLUGIN_FILE}";
 bashutilities_add_after_marker '##VARS##' "private \$settings_obj;" "${_PLUGIN_FILE}";
+bashutilities_add_after_marker '##VARS##' "private \$settings;" "${_PLUGIN_FILE}";
