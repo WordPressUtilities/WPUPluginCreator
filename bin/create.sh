@@ -64,6 +64,9 @@ fi;
 if [[ "${has_toolbox}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/toolbox.sh";
 fi;
+if [[ "${has_filecache}" == 'y' ]];then
+    . "${_SOURCEDIR}bin/create/filecache.sh";
+fi;
 if [[ "${has_api}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/api.sh";
     if [[ "${has_api_xml}" == 'y' ]];then

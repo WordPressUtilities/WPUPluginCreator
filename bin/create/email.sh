@@ -16,7 +16,7 @@ wpuplugincreator_replace_namespace "${_CLASS_FILE}" "${plugin_id}";
 
 email_string=$(cat <<EOF
         # EMAIL
-        include dirname(__FILE__) . '/inc/WPUBaseEmail/WPUBaseEmail.php';
+        require_once dirname(__FILE__) . '/inc/WPUBaseEmail/WPUBaseEmail.php';
         \$this->baseemail = new \myplugin_id\WPUBaseEmail();
 EOF
 );

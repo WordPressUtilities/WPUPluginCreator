@@ -16,7 +16,7 @@ wpuplugincreator_replace_namespace "${_CLASS_FILE}" "${plugin_id}";
 
 table_string=$(cat <<EOF
         # CUSTOM TABLE
-        include dirname(__FILE__) . '/inc/WPUBaseAdminDatas/WPUBaseAdminDatas.php';
+        require_once dirname(__FILE__) . '/inc/WPUBaseAdminDatas/WPUBaseAdminDatas.php';
         \$this->baseadmindatas = new \myplugin_id\WPUBaseAdminDatas();
         \$this->baseadmindatas->init(array(
             'handle_database' => false,

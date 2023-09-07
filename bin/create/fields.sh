@@ -47,7 +47,7 @@ fields_string=$(cat <<EOF
                 'label' => 'Group 2'
             )
         );
-        include dirname(__FILE__) . '/inc/WPUBaseFields/WPUBaseFields.php';
+        require_once dirname(__FILE__) . '/inc/WPUBaseFields/WPUBaseFields.php';
         \$this->basefields = new \myplugin_id\WPUBaseFields(\$fields, \$field_groups);
 EOF
 );

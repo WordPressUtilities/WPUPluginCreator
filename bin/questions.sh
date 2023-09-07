@@ -113,6 +113,12 @@ has_email=$(bashutilities_get_yn "- Do you need to send emails ?" 'y');
 has_toolbox=$(bashutilities_get_yn "- Do you need some functions from the toolbox ?" 'y');
 
 ###################################
+## File cache
+###################################
+
+has_filecache=$(bashutilities_get_yn "- Do you need to use file cache ?" 'y');
+
+###################################
 ## Assets
 ###################################
 

@@ -16,7 +16,7 @@ wpuplugincreator_replace_namespace "${_CLASS_FILE}" "${plugin_id}";
 
 toolbox_string=$(cat <<EOF
         # TOOLBOX
-        include dirname(__FILE__) . '/inc/WPUBaseToolbox/WPUBaseToolbox.php';
+        require_once dirname(__FILE__) . '/inc/WPUBaseToolbox/WPUBaseToolbox.php';
         \$this->basetoolbox = new \myplugin_id\WPUBaseToolbox();
 EOF
 );
