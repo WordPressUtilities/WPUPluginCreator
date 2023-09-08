@@ -95,6 +95,9 @@ _content_
     # Add PHP Version
     wpuplugincreator_update_main_file_version_replace "Requires PHP" "8.0" "${_plugin_file}";
 
+    # Use require_once
+    bashutilities_sed "s#include dirname#require_once dirname#g" "${_plugin_file}";
+
     # Uninstall
     wpuplugincreator_update_uninstall "${_plugin_dir}";
 
