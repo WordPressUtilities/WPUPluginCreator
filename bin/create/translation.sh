@@ -9,6 +9,7 @@ _TRANSLATION_FILE="${_TRANSLATION_DIR}${plugin_id}-${translation_lang}.po";
 
 echo '# Create Translation file';
 bashutilities_bury_copy "${_TOOLSDIR}translation.po" "${_TRANSLATION_FILE}";
+wpuplugincreator_protect_dir "${_TRANSLATION_DIR}",
 wpuplugincreator_set_values "${_TRANSLATION_FILE}";
 
 echo '# Load Translation file';

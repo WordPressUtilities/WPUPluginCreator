@@ -157,27 +157,11 @@ done;
 ###################################
 
 function wpuplugincreator_update_protect(){
-    local _has_protection="1";
     local _dir;
     for _dir in {"src","inc","lang","vendor"}; do
-        local _protection_file="${_dir}/.htaccess";
-        local _protection_index="${_dir}/index.php";
-        if [[ -d "${_dir}" ]];then
-            if [[ ! -f "${_protection_file}" ]];then
-                _has_protection="0";
-                echo "- Protecting dir ${_dir}";
-                echo 'deny from all' > "${_protection_file}";
-            fi;
-            if [[ ! -f "${_protection_index}" ]];then
-                _has_protection="0";
-                echo "- Protecting index dir ${_dir}";
-                echo '<?php /* Silence */' > "${_protection_index}";
-            fi;
-        fi;
+        wpuplugincreator_protect_dir "${_dir}";
     done;
-    if [[ "${_has_protection}" == '1' ]];then
-        echo "- All directories where already protected."
-    fi;
+    echo "- All directories have been protected."
 }
 
 wpuplugincreator_update_protect;

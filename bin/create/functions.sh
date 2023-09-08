@@ -46,6 +46,7 @@ deny from all
     Allow From All
 </FilesMatch>
 EOT
+    wpuplugincreator_protect_dir "${_INC_DIR}";
     fi;
 }
 
@@ -112,4 +113,20 @@ function wpuplugincreator_update_uninstall(){
     bashutilities_bury_copy "${_TOOLSDIR}uninstall.php" "${_uninstall_file}";
     bashutilities_sed "s/wpuplugincreatorpluginid/${_plugin_id}/g" "${_uninstall_file}";
     echo $(bashutilities_message  "- Uninstall file has been installed." 'success' 'nowarn');
+}
+
+function wpuplugincreator_protect_dir(){
+    local _dir="{$1}";
+    local _protection_file="${_dir}/.htaccess";
+    local _protection_index="${_dir}/index.php";
+    if [[ -d "${_dir}" ]];then
+        if [[ ! -f "${_protection_file}" ]];then
+            echo "- Protecting dir ${_dir}";
+            echo 'deny from all' > "${_protection_file}";
+        fi;
+        if [[ ! -f "${_protection_index}" ]];then
+            echo "- Protecting index dir ${_dir}";
+            echo '<?php /* Silence */' > "${_protection_index}";
+        fi;
+    fi;
 }
