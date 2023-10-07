@@ -54,6 +54,7 @@ function wpuplugincreator_create_github_actions(){
     local _hasgithub;
     local _default_branch_name;
     local _remote_github;
+    local _remote_github_base;
     local _new_action;
     if git remote get-url origin | grep -q github.com; then
       _hasgithub="1"
@@ -62,6 +63,13 @@ function wpuplugincreator_create_github_actions(){
     fi
 
     _default_branch_name=$(git rev-parse --abbrev-ref HEAD);
+
+    # Remote
+    _remote_github=$(git config --get remote.origin.url);
+    _remote_github_base=${_remote_github/\.git/};
+    _remote_github=${_remote_github/\.git/\/settings\/actions};
+    _remote_github=${_remote_github/\.git/\/settings\/actions};
+    _remote_github=${_remote_github/git\@github/https\:\/\/github};
 
     # Folder
     if [[ ! -d ".github/" ]];then
@@ -77,6 +85,7 @@ function wpuplugincreator_create_github_actions(){
         cp "${_TOOLSDIR}github-actions-php.yml" "${_php_file}";
         bashutilities_sed "s/default_branch_name/${_default_branch_name}/g" "${_php_file}";
         echo '- Added PHP github actions.';
+        echo "- Add ![PHP workflow](${_remote_github_base}/actions/workflows/php.yml/badge.svg)";
     fi;
 
     # JS
@@ -88,16 +97,13 @@ function wpuplugincreator_create_github_actions(){
             cp "${_TOOLSDIR}github-actions-js.yml" "${_js_file}";
             bashutilities_sed "s/default_branch_name/${_default_branch_name}/g" "${_js_file}";
             echo '- Added JS github actions.';
+            echo "- Add ![JS workflow](${_remote_github_base}/actions/workflows/js.yml/badge.svg) to your README.md";
         fi;
     fi;
 
     # Confirm
     if [[ "${_new_action}" == '1' ]];then
         echo 'Do not forget to go to the actions settings to disable PR approval for actions:';
-        _remote_github=$(git config --get remote.origin.url);
-        _remote_github=${_remote_github/\.git/\/settings\/actions};
-        _remote_github=${_remote_github/git\@github/https\:\/\/github};
-        _remote_github=${_remote_github/github.com\:/github\.com\/};
         echo "${_remote_github}";
     fi;
 }

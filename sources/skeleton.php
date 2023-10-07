@@ -22,7 +22,7 @@ class myplugin_classname {
     ##VARS##
 
     public function __construct() {
-        add_filter('plugins_loaded', array(&$this, 'plugins_loaded'));
+        add_action('plugins_loaded', array(&$this, 'plugins_loaded'));
         ##CONSTRUCT##
     }
 
