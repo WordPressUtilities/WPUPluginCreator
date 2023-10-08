@@ -85,7 +85,7 @@ function wpuplugincreator_create_github_actions(){
         cp "${_TOOLSDIR}github-actions-php.yml" "${_php_file}";
         bashutilities_sed "s/default_branch_name/${_default_branch_name}/g" "${_php_file}";
         echo '- Added PHP github actions.';
-        echo "- Add ![PHP workflow](${_remote_github_base}/actions/workflows/php.yml/badge.svg)";
+        echo "- Add [![PHP workflow](${_remote_github_base}/actions/workflows/php.yml/badge.svg 'PHP workflow')](${_remote_github_base}/actions) to your README.md"
     fi;
 
     # JS
@@ -97,7 +97,7 @@ function wpuplugincreator_create_github_actions(){
             cp "${_TOOLSDIR}github-actions-js.yml" "${_js_file}";
             bashutilities_sed "s/default_branch_name/${_default_branch_name}/g" "${_js_file}";
             echo '- Added JS github actions.';
-            echo "- Add ![JS workflow](${_remote_github_base}/actions/workflows/js.yml/badge.svg) to your README.md";
+            echo "- Add [![JS workflow](${_remote_github_base}/actions/workflows/js.yml/badge.svg 'JS workflow')](${_remote_github_base}/actions) to your README.md"
         fi;
     fi;
 
