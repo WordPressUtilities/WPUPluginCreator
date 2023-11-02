@@ -56,7 +56,10 @@ fi;
 ## Github actions
 ###################################
 
-has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
+has_github_actions='n';
+if [[ -f ".git/config" ]];then
+    has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
+fi;
 
 ###################################
 ## Fields
