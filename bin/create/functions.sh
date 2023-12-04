@@ -94,6 +94,7 @@ function wpuplugincreator_create_github_actions(){
         if [[ ! -f "${_js_file}" ]];then
             _new_action='1';
             cp "${_TOOLSDIR}eslint.json" "${_PLUGIN_DIR}.eslintrc.json";
+            bashutilities_sed "s/wpuplugincreatorpluginid/${_plugin_id}/g" "${_PLUGIN_DIR}.eslintrc.json";
             cp "${_TOOLSDIR}github-actions-js.yml" "${_js_file}";
             bashutilities_sed "s/default_branch_name/${_default_branch_name}/g" "${_js_file}";
             echo '- Added JS github actions.';

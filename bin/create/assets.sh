@@ -74,6 +74,7 @@ bashutilities_add_before_marker '        ##CONSTRUCT##' "${assets_register}" "${
     assets_register_js="";
     if [[ "${has_assets_front_js}" == 'y' ]];then
         cp "${_TOOLSDIR}assets/front.js" "${_ASSETS_DIR}front.js";
+        bashutilities_sed "s/wpuplugincreatorpluginid/${_plugin_id}/g" "${_ASSETS_DIR}front.js";
         assets_register_js=$(cat <<EOF
         /* Front Script with localization / variables */
         wp_register_script('myplugin_id_front_script', plugins_url('assets/front.js', __FILE__), array(), \$this->plugin_version, true);
