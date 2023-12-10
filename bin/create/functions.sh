@@ -94,7 +94,7 @@ function wpuplugincreator_create_github_actions(){
         if [[ ! -f "${_js_file}" ]];then
             _new_action='1';
             cp "${_TOOLSDIR}eslint.json" "${_PLUGIN_DIR}.eslintrc.json";
-            bashutilities_sed "s/wpuplugincreatorpluginid/${_plugin_id}/g" "${_PLUGIN_DIR}.eslintrc.json";
+            bashutilities_sed "s/wpuplugincreatorpluginid/${_PLUGIN_DIR}/g" "${_PLUGIN_DIR}.eslintrc.json";
             cp "${_TOOLSDIR}github-actions-js.yml" "${_js_file}";
             bashutilities_sed "s/default_branch_name/${_default_branch_name}/g" "${_js_file}";
             echo '- Added JS github actions.';
@@ -116,9 +116,8 @@ function wpuplugincreator_update_uninstall(){
         echo $(bashutilities_message  "- There is already an uninstall file." 'success' 'nowarn');
         return 0;
     fi;
-    local _plugin_id="${1}";
     bashutilities_bury_copy "${_TOOLSDIR}uninstall.php" "${_uninstall_file}";
-    bashutilities_sed "s/wpuplugincreatorpluginid/${_plugin_id}/g" "${_uninstall_file}";
+    bashutilities_sed "s/wpuplugincreatorpluginid/${_PLUGIN_DIR}/g" "${_uninstall_file}";
     echo $(bashutilities_message  "- Uninstall file has been installed." 'success' 'nowarn');
 }
 
