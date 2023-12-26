@@ -129,10 +129,6 @@ function wpuplugincreator_update_dependency(){
 
     local _v_src=$(bashutilities_search_extract_file "Version: " "" "${_CLASS_SRC_FILE}" );
     local _v_proj=$(bashutilities_search_extract_file "Version: " "" "${_CLASS_FILE}" );
-    if [[ "${_v_src}" == "${_v_proj}" ]];then
-        echo $(bashutilities_message  "- “${i}” is already up-to-date." 'success' 'nowarn');
-        return 0;
-    fi;
 
     # Extract namespace
     local _namespace=$(bashutilities_search_extract_file "namespace " ";" "${_CLASS_FILE}" );
@@ -144,7 +140,12 @@ function wpuplugincreator_update_dependency(){
     # Fix namespace
     wpuplugincreator_replace_namespace "${_CLASS_FILE}" "${_namespace}"
 
-    echo $(bashutilities_message "- “${i}” has been updated !" 'success');
+    # Success message
+    if [[ "${_v_src}" == "${_v_proj}" ]];then
+        echo $(bashutilities_message  "- “${i}” is already up-to-date." 'success' 'nowarn');
+    else
+        echo $(bashutilities_message "- “${i}” has been updated !" 'success');
+    fi;
 }
 
 for i in "${_DEPENDENCY_LIST[@]}"; do
