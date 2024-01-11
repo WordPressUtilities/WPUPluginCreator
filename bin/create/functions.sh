@@ -111,7 +111,7 @@ function wpuplugincreator_create_github_actions(){
 
 # Uninstall
 function wpuplugincreator_update_uninstall(){
-    local _uninstall_file="${_CURRENT_DIR}uninstall.php";
+    local _uninstall_file="${_PLUGIN_DIR}uninstall.php";
     if [[ -f "${_uninstall_file}" ]];then
         echo $(bashutilities_message  "- There is already an uninstall file." 'success' 'nowarn');
         return 0;

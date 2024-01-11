@@ -37,7 +37,7 @@ settings_string=$(cat <<EOF
                 'type' => 'textarea'
             )
         );
-        require_once dirname(__FILE__) . '/inc/WPUBaseSettings/WPUBaseSettings.php';
+        require_once __DIR__ . '/inc/WPUBaseSettings/WPUBaseSettings.php';
         \$this->settings_obj = new \myplugin_id\WPUBaseSettings(\$this->settings_details, \$this->settings);
 EOF
 );

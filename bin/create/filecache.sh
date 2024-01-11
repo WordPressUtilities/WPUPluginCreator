@@ -15,9 +15,9 @@ cp -R "${_TOOLSDIR}wpubaseplugin/inc/WPUBaseFileCache/" "${_CLASS_DIR}";
 wpuplugincreator_replace_namespace "${_CLASS_FILE}" "${plugin_id}";
 
 filecache_string=$(cat <<EOF
-        # File Cache
-        require_once dirname(__FILE__) . '/inc/WPUBaseFileCache/WPUBaseFileCache.php';
-        \$this->basefilecache = new \myplugin_id\WPUBaseFileCache();
+        # FILE CACHE
+        require_once __DIR__ . '/inc/WPUBaseFileCache/WPUBaseFileCache.php';
+        \$this->basefilecache = new \myplugin_id\WPUBaseFileCache(\$this->plugin_settings['id']);
 EOF
 );
 

@@ -13,6 +13,10 @@ License: MIT License
 License URI: https://opensource.org/licenses/MIT
 */
 
+if (!defined('ABSPATH')) {
+    exit();
+}
+
 class myplugin_classname {
     private $plugin_version = '0.1.0';
     private $plugin_settings = array(

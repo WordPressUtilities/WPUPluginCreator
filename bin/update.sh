@@ -27,8 +27,8 @@ function wpuplugincreator_update_main_file_version_replace(){
 # Main function
 
 function wpuplugincreator_update_main_file(){
-    local _plugin_dir=$(basename "${_CURRENT_DIR}");
-    local _plugin_file="${_plugin_dir}.php";
+    local _PLUGIN_DIR=$(basename "${_CURRENT_DIR}");
+    local _plugin_file="${_PLUGIN_DIR}.php";
 
     # Check if main file exists
     if [[ ! -f "${_plugin_file}" ]];then
@@ -40,10 +40,10 @@ function wpuplugincreator_update_main_file(){
         bashutilities_sed "s/load_plugin_textdomain('.*/##marker_textdomain##/g" "${_plugin_file}";
         local _content=$(cat << _content_
 \$lang_dir = dirname(plugin_basename(__FILE__)) . '/lang/';
-if (!load_plugin_textdomain('${_plugin_dir}', false, \$lang_dir)) {
-    load_muplugin_textdomain('${_plugin_dir}', \$lang_dir);
+if (!load_plugin_textdomain('${_PLUGIN_DIR}', false, \$lang_dir)) {
+    load_muplugin_textdomain('${_PLUGIN_DIR}', \$lang_dir);
 }
-\$this->plugin_description = __('PLUGIN DESCRIPTION', '${_plugin_dir}');
+\$this->plugin_description = __('PLUGIN DESCRIPTION', '${_PLUGIN_DIR}');
 _content_
 );
         bashutilities_add_after_marker '##marker_textdomain##' "${_content}" "${_plugin_file}";
@@ -82,10 +82,10 @@ _content_
     fi
 
     # Put Text Domain if missing
-    wpuplugincreator_update_main_file_version_replace "Text Domain" "${_plugin_dir}" "${_plugin_file}";
+    wpuplugincreator_update_main_file_version_replace "Text Domain" "${_PLUGIN_DIR}" "${_plugin_file}";
 
     # Put Domain Path if missing
-    if [[ -f "lang/${_plugin_dir}-fr_FR.po" ]]; then
+    if [[ -f "lang/${_PLUGIN_DIR}-fr_FR.po" ]]; then
         wpuplugincreator_update_main_file_version_replace "Domain Path" "/lang" "${_plugin_file}";
     fi
 
@@ -99,7 +99,7 @@ _content_
     bashutilities_sed "s#include dirname#require_once dirname#g" "${_plugin_file}";
 
     # Uninstall
-    wpuplugincreator_update_uninstall "${_plugin_dir}";
+    wpuplugincreator_update_uninstall "${_PLUGIN_DIR}";
 
 }
 wpuplugincreator_update_main_file;
@@ -172,8 +172,8 @@ wpuplugincreator_update_protect;
 ###################################
 
 function wpuplugincreator_update_check_code(){
-    local _plugin_dir=$(basename "${_CURRENT_DIR}");
-    local _plugin_file="${_plugin_dir}.php";
+    local _PLUGIN_DIR=$(basename "${_CURRENT_DIR}");
+    local _plugin_file="${_PLUGIN_DIR}.php";
 
     # Check if main file exists
     if [[ ! -f "${_plugin_file}" ]];then
