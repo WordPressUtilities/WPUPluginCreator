@@ -40,7 +40,7 @@ function wpuplugincreator_update_main_file(){
     if ! grep -q load_muplugin_textdomain "${_plugin_file}" && grep -q load_plugin_textdomain "${_plugin_file}"; then
         bashutilities_sed "s/load_plugin_textdomain('.*/##marker_textdomain##/g" "${_plugin_file}";
         local _content=$(cat << _content_
-\$lang_dir = dirname(plugin_basename(__FILE__)) . '/lang/';
+\$lang_dir = __DIR__ . '/lang/';
 if (!load_plugin_textdomain('${_plugin_id}', false, \$lang_dir)) {
     load_muplugin_textdomain('${_plugin_id}', \$lang_dir);
 }
@@ -67,8 +67,15 @@ _content_
         local need_http_replace=$(bashutilities_get_yn "- Do you want to replace http by https ?" 'y');
         if [[ "${need_http_replace}" == 'y' ]];then
             bashutilities_sed "s/http:/https:/g" "${_plugin_file}";
-            echo '- Replace http by https.'
+            echo '- Replaced http by https.'
         fi;
+    fi;
+
+    if grep -q "dirname" "${_plugin_file}";then
+        bashutilities_sed "s/dirname(plugin_basename(__FILE__))/__DIR__/g" "${_plugin_file}";
+        bashutilities_sed "s/dirname( __FILE__ )/__DIR__/g" "${_plugin_file}";
+        bashutilities_sed "s/dirname(__FILE__)/__DIR__/g" "${_plugin_file}";
+        echo '- Replaced dirname( __FILE__ ) by __DIR__.'
     fi;
 
     # Put Update URI if missing

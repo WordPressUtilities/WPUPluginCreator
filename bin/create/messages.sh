@@ -17,7 +17,7 @@ wpuplugincreator_replace_namespace "${_CLASS_FILE}" "${plugin_id}";
 messages_string=$(cat <<EOF
         # MESSAGES
         if (is_admin()) {
-            require_once dirname( __FILE__ ) . '/inc/WPUBaseMessages/WPUBaseMessages.php';
+            require_once __DIR__ . '/inc/WPUBaseMessages/WPUBaseMessages.php';
             \$this->messages = new \myplugin_id\WPUBaseMessages(\$this->plugin_settings['id']);
         }
 EOF

@@ -16,7 +16,7 @@ wpuplugincreator_replace_namespace "${_CLASS_FILE}" "${plugin_id}";
 
 loading_string=$(cat <<EOF
         /* Include hooks */
-        require_once dirname( __FILE__ ) . '/inc/WPUBaseCron/WPUBaseCron.php';
+        require_once __DIR__ . '/inc/WPUBaseCron/WPUBaseCron.php';
         \$this->basecron = new \myplugin_id\WPUBaseCron(array(
             'pluginname' => \$this->plugin_settings['name'],
             'cronhook' => 'myplugin_id__cron_hook',

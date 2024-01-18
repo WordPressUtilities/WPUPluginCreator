@@ -29,8 +29,8 @@ plugin_id=$(bashutilities_get_user_var "- What is the plugin ID ?" "${default_pl
 
 default_plugin_classname=$(bashutilities_titlecase "${plugin_name// /}");
 default_plugin_classname="${default_plugin_classname//-/}";
-plugin_classname=$(bashutilities_get_user_var "- What is the plugin ClassName ?" "${default_plugin_classname}");
 default_plugin_classname="${default_plugin_classname//[^[:alnum:]]/}";
+plugin_classname=$(bashutilities_get_user_var "- What is the plugin ClassName ?" "${default_plugin_classname}");
 
 ###################################
 ## Translation

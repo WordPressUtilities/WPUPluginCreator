@@ -41,7 +41,7 @@ page_string=$(cat <<EOF
             'basename' => plugin_basename(__FILE__)
         );
         // Init admin page
-        require_once dirname( __FILE__ ) . '/inc/WPUBaseAdminPage/WPUBaseAdminPage.php';
+        require_once __DIR__ . '/inc/WPUBaseAdminPage/WPUBaseAdminPage.php';
         \$this->adminpages = new \myplugin_id\WPUBaseAdminPage();
         \$this->adminpages->init(\$pages_options, \$admin_pages);
 EOF

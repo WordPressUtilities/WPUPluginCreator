@@ -16,8 +16,8 @@ echo '# Load Translation file';
 translation_string="";
 translation_string=$(cat <<EOF
         # TRANSLATION
-        if (!load_plugin_textdomain('myplugin_id', false, dirname(plugin_basename(__FILE__)) . '/lang/')) {
-            load_muplugin_textdomain('myplugin_id', dirname(plugin_basename(__FILE__)) . '/lang/');
+        if (!load_plugin_textdomain('myplugin_id', false, __DIR__ . '/lang/')) {
+            load_muplugin_textdomain('myplugin_id', __DIR__ . '/lang/');
         }
         \$this->plugin_description = __('myplugin_name is a wonderful plugin.', 'myplugin_id');
 EOF
