@@ -192,3 +192,24 @@ function wpuplugincreator_update_check_code(){
 }
 
 wpuplugincreator_update_check_code;
+
+###################################
+## Check abspath protection
+###################################
+
+function wpuplugincreator_update_add_abspath_protection() {
+    # Find and process all PHP files in the directory and subdirectories
+    find "." -type f -name "*.php" | while read file; do
+        echo $file;
+        # Check if the file contains "defined('ABSPATH')"
+        if ! grep -q "defined('ABSPATH')" "$file"; then
+            if grep -q "namespace" "$file"; then
+                bashutilities_add_after_first_marker "namespace" "defined('ABSPATH') || die;" "$file"
+            else
+                bashutilities_add_after_first_marker "<\?php" "defined('ABSPATH') || die;" "$file"
+            fi
+        fi
+    done
+}
+
+wpuplugincreator_update_add_abspath_protection
