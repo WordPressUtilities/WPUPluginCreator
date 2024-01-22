@@ -40,7 +40,7 @@ function wpuplugincreator_update_main_file(){
     if ! grep -q load_muplugin_textdomain "${_plugin_file}" && grep -q load_plugin_textdomain "${_plugin_file}"; then
         bashutilities_sed "s/load_plugin_textdomain('.*/##marker_textdomain##/g" "${_plugin_file}";
         local _content=$(cat << _content_
-\$lang_dir = __DIR__ . '/lang/';
+\$lang_dir = dirname(plugin_basename(__FILE__)) . '/lang/';
 if (!load_plugin_textdomain('${_plugin_id}', false, \$lang_dir)) {
     load_muplugin_textdomain('${_plugin_id}', \$lang_dir);
 }
@@ -72,7 +72,6 @@ _content_
     fi;
 
     if grep -q "dirname" "${_plugin_file}";then
-        bashutilities_sed "s/dirname(plugin_basename(__FILE__))/__DIR__/g" "${_plugin_file}";
         bashutilities_sed "s/dirname( __FILE__ )/__DIR__/g" "${_plugin_file}";
         bashutilities_sed "s/dirname(__FILE__)/__DIR__/g" "${_plugin_file}";
         echo '- Replaced dirname( __FILE__ ) by __DIR__.'
@@ -202,7 +201,7 @@ function wpuplugincreator_update_add_abspath_protection() {
     find "." -type f -name "*.php" | while read file; do
         echo $file;
         # Check if the file contains "defined('ABSPATH')"
-        if ! grep -q "defined('ABSPATH')" "$file"; then
+        if ! grep -q "defined('ABSPATH')" "$file" && [ $(grep -c . "$file") -gt 1 ]; then
             if grep -q "namespace" "$file"; then
                 bashutilities_add_after_first_marker "namespace" "defined('ABSPATH') || die;" "$file"
             else
