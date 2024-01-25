@@ -28,7 +28,7 @@ function wpuplugincreator_update_main_file_version_replace(){
 
 function wpuplugincreator_update_main_file(){
     local _plugin_id=$(basename "${_CURRENT_DIR}");
-    local _PLUGIN_DIR="${_PLUGIN_DIR}/";
+    local _PLUGIN_DIR="./";
     local _plugin_file="${_plugin_id}.php";
 
     # Check if main file exists
@@ -53,13 +53,21 @@ _content_
     fi
 
     # Github actions
-    if [[ ! -f ".github/workflows/php.yml" || ! -f ".github/workflows/js.yml" ]];then
+    local _php_workflow=".github/workflows/php.yml";
+    local _js_workflow=".github/workflows/js.yml";
+    if [[ ! -f "${_php_workflow}" || ! -f "${_js_workflow}" ]];then
         local has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
         if [[ "${has_github_actions}" == 'y' ]];then
             wpuplugincreator_create_github_actions;
         fi;
     else
         echo $(bashutilities_message  "- Github actions are already installed." 'success' 'nowarn');
+        if [[ -f "${_php_workflow}" ]];then
+            bashutilities_sed "s#actions/checkout@v2#actions/checkout@v3#g" "${_php_workflow}";
+        fi;
+        if [[ -f "${_js_workflow}" ]];then
+            bashutilities_sed "s#actions/checkout@v2#actions/checkout@v3#g" "${_js_workflow}";
+        fi;
     fi;
 
     # Check http
