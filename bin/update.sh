@@ -56,7 +56,10 @@ _content_
     local _php_workflow=".github/workflows/php.yml";
     local _js_workflow=".github/workflows/js.yml";
     if [[ ! -f "${_php_workflow}" || ! -f "${_js_workflow}" ]];then
-        local has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
+        local has_github_actions='n';
+        if git remote -v | grep -q 'github.com'; then
+            has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
+        fi
         if [[ "${has_github_actions}" == 'y' ]];then
             wpuplugincreator_create_github_actions;
         fi;

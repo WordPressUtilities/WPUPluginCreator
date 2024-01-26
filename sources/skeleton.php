@@ -8,7 +8,9 @@ Version: 0.1.0
 Author: author_name
 Author URI: https://author_id.me/
 Text Domain: myplugin_id
-Domain Path: /lang/
+Domain Path: /lang
+Requires at least: 6.2
+Requires PHP: 8.0
 License: MIT License
 License URI: https://opensource.org/licenses/MIT
 */

@@ -57,7 +57,7 @@ fi;
 ###################################
 
 has_github_actions='n';
-if [[ -f ".git/config" ]];then
+if [ -f ".git/config" ] && git remote -v | grep -q 'github.com'; then
     has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
 fi;
 
