@@ -210,11 +210,12 @@ wpuplugincreator_update_check_code;
 function wpuplugincreator_update_add_abspath_protection() {
     # Find and process all PHP files in the directory and subdirectories
     find "." -type f -name "*.php" | while read file; do
-        echo $file;
-        # Check if the file contains "defined('ABSPATH')"
+        # Check if the file contains "defined('ABSPATH')" and contains more than a line
         if ! grep -q "defined('ABSPATH')" "$file" && [ $(grep -c . "$file") -gt 1 ]; then
             if grep -q "namespace" "$file"; then
                 bashutilities_add_after_first_marker "namespace" "defined('ABSPATH') || die;" "$file"
+            elif ! grep -q "<\?php" "$file"; then
+                echo -e "<?php defined('ABSPATH') || die; ?>\n$(cat "$file")" > "$file";
             else
                 bashutilities_add_after_first_marker "<\?php" "defined('ABSPATH') || die;" "$file"
             fi
