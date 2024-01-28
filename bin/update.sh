@@ -215,7 +215,7 @@ function wpuplugincreator_update_add_abspath_protection() {
             if grep -q "namespace" "$file"; then
                 bashutilities_add_after_first_marker "namespace" "defined('ABSPATH') || die;" "$file"
             elif ! grep -q "<\?php" "$file"; then
-                echo -e "<?php defined('ABSPATH') || die; ?>\n$(cat "$file")" > "$file";
+                bashutilities_insert_at_beginning "<?php defined('ABSPATH') || die; ?>\n" "$file";
             else
                 bashutilities_add_after_first_marker "<\?php" "defined('ABSPATH') || die;" "$file"
             fi
