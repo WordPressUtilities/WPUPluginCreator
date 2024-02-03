@@ -125,9 +125,18 @@ has_filecache=$(bashutilities_get_yn "- Do you need to use file cache ?" 'y');
 ## Assets
 ###################################
 
-has_assets=$(bashutilities_get_yn "- Do you need CSS / JS assets ?" 'y');
+has_ajax=$(bashutilities_get_yn "- Do you need an AJAX callback ?" 'n');
+if [[ "${has_ajax}" == 'y' ]];then
+    has_assets='y';
+else
+    has_assets=$(bashutilities_get_yn "- Do you need CSS / JS assets ?" 'y');
+fi;
 if [[ "${has_assets}" == 'y' ]];then
-    has_assets_front_js=$(bashutilities_get_yn "-- JS in Front-Office ?" "y");
+    if [[ "${has_ajax}" == 'y' ]];then
+        has_assets_front_js='y';
+    else
+        has_assets_front_js=$(bashutilities_get_yn "-- JS in Front-Office ?" "y");
+    fi;
     has_assets_back_js=$(bashutilities_get_yn "-- JS in Back-Office ?" "y");
     has_assets_front_css=$(bashutilities_get_yn "-- CSS in Front-Office ?" "y");
     has_assets_back_css=$(bashutilities_get_yn "-- CSS in Back-Office ?" "y");

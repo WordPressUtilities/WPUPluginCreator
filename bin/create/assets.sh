@@ -74,10 +74,14 @@ bashutilities_add_before_marker '        ##CONSTRUCT##' "${assets_register}" "${
     assets_register_js="";
     if [[ "${has_assets_front_js}" == 'y' ]];then
         cp "${_TOOLSDIR}assets/front.js" "${_ASSETS_DIR}front.js";
-        bashutilities_sed "s/wpuplugincreatorpluginid/${_plugin_id}/g" "${_ASSETS_DIR}front.js";
+        bashutilities_sed "s/wpuplugincreatorpluginid/${plugin_id}/g" "${_ASSETS_DIR}front.js";
+        assets_dependencies='';
+        if [[ "${has_ajax}" == 'y' ]];then
+            assets_dependencies="'wp-util'";
+        fi;
         assets_register_js=$(cat <<EOF
         /* Front Script with localization / variables */
-        wp_register_script('myplugin_id_front_script', plugins_url('assets/front.js', __FILE__), array(), \$this->plugin_version, true);
+        wp_register_script('myplugin_id_front_script', plugins_url('assets/front.js', __FILE__), array(${assets_dependencies}), \$this->plugin_version, true);
         wp_localize_script('myplugin_id_front_script', 'myplugin_id_settings', array(
             'ajax_url' => admin_url('admin-ajax.php')
         ));
@@ -108,5 +112,50 @@ ${assets_register_js}
 EOF
 );
     bashutilities_add_before_marker '    ##METHODS##' "${assets_register_method}" "${_PLUGIN_FILE}";
+
+fi;
+
+###################################
+## AJAX
+###################################
+
+if [[ "${has_ajax}" == 'y' ]];then
+
+    # Register hook
+    ajax_action=$(cat <<EOF
+        # AJAX Action
+        add_action('wp_ajax_myplugin_id_ajax_action', array(&\$this, 'myplugin_id_ajax_action'));
+        add_action('wp_ajax_nopriv_myplugin_id_ajax_action', array(&\$this, 'myplugin_id_ajax_action'));
+EOF
+);
+    bashutilities_add_before_marker '        ##CONSTRUCT##' "${ajax_action}" "${_PLUGIN_FILE}";
+
+    # Create method
+    ajax_action_method=$(cat <<EOF
+
+    function myplugin_id_ajax_action() {
+        wp_send_json_success( array(
+            'ok' => '1'
+        ), 200 );
+    }
+EOF
+);
+    bashutilities_add_before_marker '    ##METHODS##' "${ajax_action_method}" "${_PLUGIN_FILE}";
+
+
+    # JS Callback
+    cat <<EOT >> "${_ASSETS_DIR}front.js"
+/* AJAX */
+document.addEventListener("DOMContentLoaded", function() {
+    'use strict';
+    if(false){
+        wp.ajax.post("${plugin_id}_ajax_action", {
+            'value': 1
+        });
+    }
+});
+
+EOT
+
 
 fi;
