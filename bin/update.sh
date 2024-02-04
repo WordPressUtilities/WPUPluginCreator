@@ -213,8 +213,8 @@ function wpuplugincreator_update_add_abspath_protection() {
     find "." -type f -name "*.php" | while read file; do
         # Check if the file contains "defined('ABSPATH')" and contains more than a line
         if ! grep -q "defined('ABSPATH')" "$file" && [ $(grep -c . "$file") -gt 1 ]; then
-            start_of_file=$(head -n 1 "$file")
-            if ! grep -q "^<\?php" <<< "$start_of_file"; then
+            start_of_file=$(head -n 1 "$file");
+            if [ "${start_of_file:0:5}" != '<?php' ]; then
                 bashutilities_insert_at_beginning "<?php defined('ABSPATH') || die; ?>" "$file";
             elif grep -q "namespace" "$file"; then
                 bashutilities_add_after_first_marker "namespace" "defined('ABSPATH') || die;" "$file"
