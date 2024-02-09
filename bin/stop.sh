@@ -2,6 +2,7 @@
 
 unset -f wpuplugincreator_create_github_actions;
 unset -f wpuplugincreator_create_inc;
+unset -f wpuplugincreator_find_folder;
 unset -f wpuplugincreator_has_github_actions;
 unset -f wpuplugincreator_protect_dir;
 unset -f wpuplugincreator_remove_markers;

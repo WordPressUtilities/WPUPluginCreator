@@ -2,7 +2,7 @@
 
 WPUPluginCreator(){
 
-local _WPUPLUGINCREATOR_VERSION='0.31.1';
+local _WPUPLUGINCREATOR_VERSION='0.32.0';
 local _SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
 local _TOOLSDIR="${_SOURCEDIR}sources/";
 local _CURRENT_DIR="$( pwd )/";
@@ -40,9 +40,11 @@ fi;
 
 case "${1}" in
     'add')
+        . "${_SOURCEDIR}bin/find-folder.sh";
         . "${_SOURCEDIR}bin/add.sh";
     ;;
     'update')
+        . "${_SOURCEDIR}bin/find-folder.sh";
         . "${_SOURCEDIR}bin/update.sh";
     ;;
     'create')
