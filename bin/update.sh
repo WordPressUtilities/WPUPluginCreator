@@ -115,6 +115,7 @@ _content_
 
     # Use require_once
     bashutilities_sed "s#include dirname#require_once dirname#g" "${_plugin_file}";
+    bashutilities_sed "s#include __DIR__#require_once __DIR__#g" "${_plugin_file}";
 
     # Uninstall
     wpuplugincreator_update_uninstall "." "${_plugin_id}";
