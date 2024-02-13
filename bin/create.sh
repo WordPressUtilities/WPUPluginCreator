@@ -24,6 +24,10 @@ if [[ -f "${_PLUGIN_FILE}" ]];then
     return 0;
 fi;
 
+if [[ "${need_repository}" == 'y' ]];then
+    git init;
+fi;
+
 . "${_SOURCEDIR}bin/create/file.sh";
 if [[ "${has_translation}" == 'y' ]];then
     . "${_SOURCEDIR}bin/create/translation.sh";

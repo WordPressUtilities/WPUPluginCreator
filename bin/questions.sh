@@ -53,11 +53,20 @@ if [[ "${has_post_type}" == 'y' ]];then
 fi;
 
 ###################################
+## Repository
+###################################
+
+need_repository='n';
+i[ ! -f ".git/config" ];then,
+    need_repository=$(bashutilities_get_yn "- Do you need a git repository ?" 'y');
+fi;
+
+###################################
 ## Github actions
 ###################################
 
 has_github_actions='n';
-if [ -f ".git/config" ] && git remote -v | grep -q 'github.com'; then
+if [ -f ".git/config" ] && git remote -v | grep -q 'github.com']; then
     has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
 fi;
 
