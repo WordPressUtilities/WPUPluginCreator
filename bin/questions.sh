@@ -57,7 +57,7 @@ fi;
 ###################################
 
 need_repository='n';
-i[ ! -f ".git/config" ];then,
+if [ ! -f ".git/config" ];then
     need_repository=$(bashutilities_get_yn "- Do you need a git repository ?" 'y');
 fi;
 
