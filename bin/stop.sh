@@ -15,3 +15,4 @@ unset -f wpuplugincreator_update_main_file;
 unset -f wpuplugincreator_update_main_file_version_replace;
 unset -f wpuplugincreator_update_protect;
 unset -f wpuplugincreator_update_uninstall;
+unset -f wpuplugincreator_upgrade_wpubaseplugin;

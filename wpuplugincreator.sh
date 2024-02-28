@@ -2,7 +2,7 @@
 
 WPUPluginCreator(){
 
-local _WPUPLUGINCREATOR_VERSION='0.32.4';
+local _WPUPLUGINCREATOR_VERSION='0.33.0';
 local _SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
 local _TOOLSDIR="${_SOURCEDIR}sources/";
 local _CURRENT_DIR="$( pwd )/";
@@ -32,6 +32,7 @@ fi;
 ## Functions
 ###################################
 
+. "${_SOURCEDIR}bin/autocomplete.sh";
 . "${_SOURCEDIR}bin/create/functions.sh";
 
 ###################################
@@ -42,6 +43,9 @@ case "${1}" in
     'add')
         . "${_SOURCEDIR}bin/find-folder.sh";
         . "${_SOURCEDIR}bin/add.sh";
+    ;;
+    'upgrade-wpubaseplugin')
+        . "${_SOURCEDIR}bin/upgrade-wpubaseplugin.sh";
     ;;
     'update')
         . "${_SOURCEDIR}bin/find-folder.sh";
