@@ -191,15 +191,16 @@ wpuplugincreator_update_protect;
 ###################################
 
 function wpuplugincreator_update_check_code(){
-    local _PLUGIN_DIR=$(basename "${_CURRENT_DIR}")"/";
-    local _plugin_file="${_PLUGIN_DIR}.php";
+    local _plugin_id=$(basename "${_CURRENT_DIR}");
+    local _PLUGIN_DIR="./";
+    local _plugin_file="${_plugin_id}.php";
 
     # Check if main file exists
     if [[ ! -f "${_plugin_file}" ]];then
         return 0;
     fi;
 
-    php "${_TOOLSDIR}/update-code.php" "${_CURRENT_DIR}/${_plugin_file}";
+    php "${_TOOLSDIR}/update-code.php" "${_PLUGIN_DIR}/${_plugin_file}";
 }
 
 wpuplugincreator_update_check_code;
