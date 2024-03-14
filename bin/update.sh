@@ -230,3 +230,23 @@ function wpuplugincreator_update_add_abspath_protection() {
 }
 
 wpuplugincreator_update_add_abspath_protection
+
+###################################
+## Check abspath protection
+###################################
+
+function wpuplugincreator_update_gitignore() {
+    if [[ ! -f ".git/config" && ! -f ".git" && ! -d ".git" ]];then
+        return 0;
+    fi;
+
+    if [[ ! -f ".gitignore" ]];then
+        touch ".gitignore";
+    fi;
+
+    if ! grep -q "mo.php" ".gitignore"; then
+        echo "*.mo.php" >> ".gitignore";
+    fi
+}
+
+wpuplugincreator_update_gitignore

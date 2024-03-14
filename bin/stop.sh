@@ -11,6 +11,7 @@ unset -f wpuplugincreator_set_values;
 unset -f wpuplugincreator_update_add_abspath_protection;
 unset -f wpuplugincreator_update_check_code;
 unset -f wpuplugincreator_update_dependency;
+unset -f wpuplugincreator_update_gitignore;
 unset -f wpuplugincreator_update_main_file;
 unset -f wpuplugincreator_update_main_file_version_replace;
 unset -f wpuplugincreator_update_protect;
