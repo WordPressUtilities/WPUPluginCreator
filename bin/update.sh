@@ -113,6 +113,9 @@ _content_
     # Add PHP Version
     wpuplugincreator_update_main_file_version_replace "Requires PHP" "8.0" "${_plugin_file}";
 
+    # Add Network Settings
+    wpuplugincreator_update_main_file_version_replace "Network" "Optional" "${_plugin_file}";
+
     # Use require_once
     bashutilities_sed "s#include dirname#require_once dirname#g" "${_plugin_file}";
     bashutilities_sed "s#include __DIR__#require_once __DIR__#g" "${_plugin_file}";
@@ -178,9 +181,21 @@ done;
 
 function wpuplugincreator_update_protect(){
     local _dir;
+    local js_files;
+    local css_files;
+
+    # Protect subdirectories
     for _dir in {"src","inc","lang","vendor"}; do
         wpuplugincreator_protect_dir "${_dir}";
     done;
+
+    # Protect main dir
+    js_files=$(find "." -type f -name "*.js")
+    css_files=$(find "." -type f -name "*.css")
+    if [[ -z $js_files && -z $css_files ]]; then
+        wpuplugincreator_protect_dir ".";
+    fi
+
     echo "- All directories have been protected."
 }
 

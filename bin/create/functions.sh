@@ -122,7 +122,7 @@ function wpuplugincreator_update_uninstall(){
 }
 
 function wpuplugincreator_protect_dir(){
-    local _dir="{$1}";
+    local _dir="${1}";
     local _protection_file="${_dir}/.htaccess";
     local _protection_index="${_dir}/index.php";
     if [[ -d "${_dir}" ]];then
