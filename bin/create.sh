@@ -25,7 +25,7 @@ if [[ -f "${_PLUGIN_FILE}" ]];then
 fi;
 
 if [[ "${need_repository}" == 'y' ]];then
-    git init;
+    $(cd "${_PLUGIN_DIR}";git init);
 fi;
 
 . "${_SOURCEDIR}bin/create/file.sh";
