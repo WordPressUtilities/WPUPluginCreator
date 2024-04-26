@@ -57,9 +57,9 @@ function wpuplugincreator_create_github_actions(){
     local _remote_github_base;
     local _new_action;
     if git remote get-url origin | grep -q github.com; then
-      _hasgithub="1"
+        _hasgithub="1"
     else
-      return 0;
+        return 0;
     fi
 
     _default_branch_name=$(git rev-parse --abbrev-ref HEAD);
@@ -74,8 +74,10 @@ function wpuplugincreator_create_github_actions(){
     # Folder
     if [[ ! -d ".github/" ]];then
         mkdir "${_PLUGIN_DIR}.github";
-        mkdir "${_PLUGIN_DIR}.github/workflows/";
         echo "deny from all" > "${_PLUGIN_DIR}.github/.htaccess";
+    fi;
+    if [[ ! -d ".github/workflows/" ]];then
+        mkdir "${_PLUGIN_DIR}.github/workflows/";
     fi;
 
     # PHP
