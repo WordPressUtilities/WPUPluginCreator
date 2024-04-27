@@ -2,11 +2,17 @@
 
 WPUPluginCreator(){
 
-local _WPUPLUGINCREATOR_VERSION='0.34.7';
+local _WPUPLUGINCREATOR_VERSION='0.35.0';
 local _SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
 local _TOOLSDIR="${_SOURCEDIR}sources/";
 local _CURRENT_DIR="$( pwd )/";
 local _DEPENDENCY_LIST=("WPUBaseAdminDatas" "WPUBaseAdminPage" "WPUBaseCron" "WPUBaseMessages" "WPUBaseSettings" "WPUBaseUpdate" "WPUBaseFields" "WPUBaseEmail" "WPUBaseToolbox" "WPUBaseFileCache");
+
+###################################
+## Initial
+###################################
+
+. "${_SOURCEDIR}bin/create/functions.sh";
 
 ###################################
 ## Test submodules
@@ -17,6 +23,19 @@ if [[ ! -f "${_TOOLSDIR}BashUtilities/README.md" || ! -f "${_TOOLSDIR}wpubaseplu
     git submodule update --init --recursive;
     cd "${_CURRENT_DIR}";
 fi;
+
+###################################
+## Install WP-Cli
+###################################
+
+local _WPCLISRC="${_SOURCEDIR}wp-cli.phar";
+if [ ! -f "${_WPCLISRC}" ]; then
+    wpuplugincreator_install_wpcli;
+fi;
+
+function wpuplugincreator_wpcli_command(){
+    php "${_WPCLISRC}" $@;
+}
 
 ###################################
 ## Tools
@@ -33,7 +52,6 @@ fi;
 ###################################
 
 . "${_SOURCEDIR}bin/autocomplete.sh";
-. "${_SOURCEDIR}bin/create/functions.sh";
 
 ###################################
 ## Start tool
@@ -47,9 +65,16 @@ case "${1}" in
     'upgrade-wpubaseplugin')
         . "${_SOURCEDIR}bin/upgrade-wpubaseplugin.sh";
     ;;
+    'self-update')
+        . "${_SOURCEDIR}bin/self-update.sh";
+    ;;
+    'regenerate-lang')
+        . "${_SOURCEDIR}bin/regenerate-lang.sh";
+    ;;
     'update')
         . "${_SOURCEDIR}bin/find-folder.sh";
         . "${_SOURCEDIR}bin/update.sh";
+        . "${_SOURCEDIR}bin/regenerate-lang.sh";
     ;;
     'create')
         . "${_SOURCEDIR}bin/check-create.sh";

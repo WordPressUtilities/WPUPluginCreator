@@ -138,3 +138,21 @@ function wpuplugincreator_protect_dir(){
         fi;
     fi;
 }
+
+function wpuplugincreator_install_wpcli(){
+    cd "${_SOURCEDIR}";
+    if [ -f "${_WPCLISRC}" ]; then
+        rm -rf "${_WPCLISRC}";
+    fi;
+    echo '# WP-CLI : Installation in progress';
+    curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar --output "${_WPCLISRC}";
+    chmod +x "${_WPCLISRC}";
+    cd "${_CURRENT_DIR}";
+}
+
+function wpuplugincreator_regenerate_languages(){
+    local _dir="${1}";
+    rm "${_dir}"/*.l10n.php;
+    wp i18n make-php "${_dir}";
+    echo $(bashutilities_message  "- Languages have been regenerated." 'success' 'nowarn');
+}

@@ -43,7 +43,7 @@ Add CLI shortcut :
 
 ## Quality of life
 
-- [ ] Self update.
+- [x] Self update.
 - [ ] Ask the plugin repository ( to clone or add as a remote )
 - [ ] Check if this is a WordPress plugin folder ? ( Just an alert, non blocking )
 

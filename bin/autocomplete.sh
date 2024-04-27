@@ -12,7 +12,7 @@ _wpuplugincreator_complete() {
     prev=${COMP_WORDS[COMP_CWORD-1]}
 
     if [ $COMP_CWORD -eq 1 ]; then
-        COMPREPLY=( $(compgen -W "add create help src update" -- $cur) )
+        COMPREPLY=( $(compgen -W "add create help regenerate-lang self-update src update" -- $cur) )
     fi
 
     return 0
