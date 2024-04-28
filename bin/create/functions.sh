@@ -150,9 +150,11 @@ function wpuplugincreator_install_wpcli(){
     cd "${_CURRENT_DIR}";
 }
 
-function wpuplugincreator_regenerate_languages(){
-    local _dir="${1}";
-    rm "${_dir}"/*.l10n.php;
-    wp i18n make-php "${_dir}";
-    echo $(bashutilities_message  "- Languages have been regenerated." 'success' 'nowarn');
+function wpuplugincreator_regenerate_languages() {
+    local _dir="${1}"
+    if ls "${_dir}"/*.l10n.php &>/dev/null; then
+        rm "${_dir}"/*.l10n.php
+    fi
+    wp i18n make-php "${_dir}"
+    echo $(bashutilities_message "- Languages have been regenerated." 'success' 'nowarn')
 }
