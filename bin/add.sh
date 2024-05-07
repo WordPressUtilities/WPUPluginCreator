@@ -1,14 +1,18 @@
 #!/bin/bash
 
-function wpuplugincreator_add_dependency(){
+function wpuplugincreator_add_dependency() {
+    local i="${1}";
+    local _force_add="${2}";
     local _CLASS_FILE="${i}/${i}.php";
-    if [[ -f "inc/${_CLASS_FILE}" || -f "inc/${i}.php" ]];then
+    if [[ -f "inc/${_CLASS_FILE}" || -f "inc/${i}.php" ]]; then
         return 0;
     fi;
 
-    local _add_this_module=$(bashutilities_get_yn "- Install "${i}"?" 'n');
-    if [[ "${_add_this_module}" != 'y' ]];then
-        return 0;
+    if [[ "${_force_add}" != '1' ]]; then
+        local _add_this_module=$(bashutilities_get_yn "- Install "${i}"?" 'n')
+        if [[ "${_add_this_module}" != 'y' ]]; then
+            return 0
+        fi;
     fi;
 
     local _CLASS_NAME="${i}";
@@ -34,6 +38,11 @@ function wpuplugincreator_add_dependency(){
 
     echo $(bashutilities_message "- “${i}” has been installed !" 'success');
 }
+
+if [[ "${_DEPENDENCY_LIST[*]}" =~ (^|[[:space:]])"${2}"($|[[:space:]]) ]]; then
+    wpuplugincreator_add_dependency "${2}" '1';
+    return 0;
+fi;
 
 for i in "${_DEPENDENCY_LIST[@]}"; do
     wpuplugincreator_add_dependency "${i}";

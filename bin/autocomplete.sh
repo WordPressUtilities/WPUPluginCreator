@@ -5,14 +5,20 @@
 ###################################
 
 _wpuplugincreator_complete() {
-    local cur prev prev2
+    local cur prev;
 
     COMPREPLY=()
     cur=${COMP_WORDS[COMP_CWORD]}
     prev=${COMP_WORDS[COMP_CWORD-1]}
 
     if [ $COMP_CWORD -eq 1 ]; then
-        COMPREPLY=( $(compgen -W "add create help regenerate-lang self-update src update" -- $cur) )
+        COMPREPLY=($(compgen -W "add create help regenerate-lang self-update src update" -- $cur))
+    elif [ $COMP_CWORD -eq 2 ]; then
+        case "${prev}" in
+        'add')
+            COMPREPLY=($(compgen -W "WPUBaseAdminDatas WPUBaseAdminPage WPUBaseCron WPUBaseMessages WPUBaseSettings WPUBaseUpdate WPUBaseFields WPUBaseEmail WPUBaseToolbox WPUBaseFileCache" -- $cur))
+            ;;
+        esac
     fi
 
     return 0
