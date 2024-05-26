@@ -11,12 +11,14 @@ _wpuplugincreator_complete() {
     cur=${COMP_WORDS[COMP_CWORD]}
     prev=${COMP_WORDS[COMP_CWORD-1]}
 
+    local modules_list="WPUBaseAdminDatas WPUBaseAdminPage WPUBaseCron WPUBaseMessages WPUBaseSettings WPUBaseUpdate WPUBaseFields WPUBaseEmail WPUBaseToolbox WPUBaseFileCache";
+
     if [ $COMP_CWORD -eq 1 ]; then
-        COMPREPLY=($(compgen -W "add create help regenerate-lang self-update src update" -- $cur))
+        COMPREPLY=($(compgen -W "add create help regenerate-lang self-update src update upgrade-wpubaseplugin" -- $cur))
     elif [ $COMP_CWORD -eq 2 ]; then
         case "${prev}" in
-        'add')
-            COMPREPLY=($(compgen -W "WPUBaseAdminDatas WPUBaseAdminPage WPUBaseCron WPUBaseMessages WPUBaseSettings WPUBaseUpdate WPUBaseFields WPUBaseEmail WPUBaseToolbox WPUBaseFileCache" -- $cur))
+        'add' | 'upgrade-wpubaseplugin')
+            COMPREPLY=($(compgen -W "${modules_list}" -- $cur))
             ;;
         esac
     fi
