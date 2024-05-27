@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function(e) {
+document.addEventListener('DOMContentLoaded', function() {
     'use strict';
-    console.log('wpuplugincreatorpluginid_settings');
+    console.log(wpuplugincreatorpluginid_settings);
 });

@@ -26,3 +26,10 @@ $allposts = get_posts(array(
 foreach ($allposts as $p) {
     wp_delete_post($p, true);
 }
+
+/* Delete all terms */
+$taxonomy = 'your_taxonomy';
+$terms = get_terms($taxonomy, array('hide_empty' => false));
+foreach ($terms as $term) {
+    wp_delete_term($term->term_id, $taxonomy);
+}
