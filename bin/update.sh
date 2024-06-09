@@ -53,23 +53,30 @@ _content_
     fi
 
     # Github actions
-    local _php_workflow=".github/workflows/php.yml";
-    local _js_workflow=".github/workflows/js.yml";
-    if [[ ! -f "${_php_workflow}" || ! -f "${_js_workflow}" ]];then
-        local has_github_actions='n';
+    local _github_actions_dir=".github/workflows/";
+    local _php_workflow="${_github_actions_dir}php.yml";
+    local _js_workflow="${_github_actions_dir}js.yml";
+    if [[ ! -d "${_github_actions_dir}" ]];then
+        local _has_github_actions='n';
         if git remote -v | grep -q 'github.com'; then
-            has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
+            _has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
         fi
-        if [[ "${has_github_actions}" == 'y' ]];then
+        if [[ "${_has_github_actions}" == 'y' ]];then
             wpuplugincreator_create_github_actions;
         fi;
     else
         echo $(bashutilities_message  "- Github actions are already installed." 'success' 'nowarn');
-        if [[ -f "${_php_workflow}" ]];then
-            bashutilities_sed "s#actions/checkout@v2#actions/checkout@v3#g" "${_php_workflow}";
-        fi;
-        if [[ -f "${_js_workflow}" ]];then
-            bashutilities_sed "s#actions/checkout@v2#actions/checkout@v3#g" "${_js_workflow}";
+        local _reinstall_github_actions=$(bashutilities_get_yn "- Do you want to reinstall github actions ?" 'n');
+        if [[ "${_reinstall_github_actions}" == 'y' ]];then
+            rm -Rf "${_github_actions_dir}";
+            wpuplugincreator_create_github_actions;
+        else
+            if [[ -f "${_php_workflow}" ]];then
+                bashutilities_sed "s#actions/checkout@v2#actions/checkout@v3#g" "${_php_workflow}";
+            fi;
+            if [[ -f "${_js_workflow}" ]];then
+                bashutilities_sed "s#actions/checkout@v2#actions/checkout@v3#g" "${_js_workflow}";
+            fi;
         fi;
     fi;
 
@@ -265,3 +272,21 @@ function wpuplugincreator_update_gitignore() {
 }
 
 wpuplugincreator_update_gitignore
+
+###################################
+## Check main branch
+###################################
+
+function wpuplugincreator_migrate_from_master_to_main(){
+    local _migrate_branch='n';
+    if git branch | grep -q "master"; then
+        _migrate_branch=$(bashutilities_get_yn "- Do you want to migrate the main branch from master to main ?" 'y');
+    fi;
+    if [[ "${_migrate_branch}" == 'y' ]];then
+        git add .;
+        git branch -m master main;
+        echo $(bashutilities_message  "- The current branch is now 'main'." 'success');
+    fi;
+}
+
+wpuplugincreator_migrate_from_master_to_main;
