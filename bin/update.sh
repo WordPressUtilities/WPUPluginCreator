@@ -80,6 +80,9 @@ _content_
         fi;
     fi;
 
+    # Fix button call
+    bashutilities_sed "s/echo submit_button/submit_button/g" "${_plugin_file}";
+
     # Check http
     if grep -q "http:" "${_plugin_file}";then
         local need_http_replace=$(bashutilities_get_yn "- Do you want to replace http by https ?" 'y');
@@ -89,6 +92,7 @@ _content_
         fi;
     fi;
 
+    # Replace dirname
     if grep -q "dirname" "${_plugin_file}";then
         bashutilities_sed "s/dirname( __FILE__ )/__DIR__/g" "${_plugin_file}";
         bashutilities_sed "s/dirname(__FILE__)/__DIR__/g" "${_plugin_file}";
