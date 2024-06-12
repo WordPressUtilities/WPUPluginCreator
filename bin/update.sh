@@ -65,7 +65,7 @@ _content_
             wpuplugincreator_create_github_actions;
         fi;
     else
-        echo $(bashutilities_message  "- Github actions are already installed." 'success' 'nowarn');
+        bashutilities_message  "- Github actions are already installed." 'success' 'nowarn';
         local _reinstall_github_actions=$(bashutilities_get_yn "- Do you want to reinstall github actions ?" 'n');
         if [[ "${_reinstall_github_actions}" == 'y' ]];then
             rm -Rf "${_github_actions_dir}";
@@ -138,6 +138,46 @@ _content_
 wpuplugincreator_update_main_file;
 
 ###################################
+## License
+###################################
+
+function wpuplugincreator_update_license(){
+    local _license_file="LICENSE";
+    local _need_license_file="y";
+    local _mode='update';
+
+    # Stop if repo is not from github
+    if ! git remote -v | grep -q 'github.com'; then
+        return 0;
+    fi;
+
+    # Check if license file exists
+    if [[ ! -f "${_license_file}" ]];then
+        _mode='create';
+        echo '- No license file found.';
+        _need_license_file=$(bashutilities_get_yn "- Do you want to add a license file ?" 'y');
+    fi;
+
+    if [[ "${_need_license_file}" == 'n' ]];then
+        return 0;
+    fi;
+
+    # Refresh the Copyright time
+    local _current_year=$(date +"%Y");
+    local _license_content=$(cat "${_TOOLSDIR}/LICENSE");
+    local _license_content_new=$(echo "${_license_content}" | sed "s/CURRENT_YEAR/${_current_year}/");
+    echo "${_license_content_new}" > "${_license_file}";
+
+    if [[ "${_mode}" == 'create' ]];then
+        bashutilities_message  "- License file has been created." 'success';
+    else
+        bashutilities_message  "- License file has been updated." 'success';
+    fi;
+}
+
+wpuplugincreator_update_license
+
+###################################
 ## Dependencies
 ###################################
 
@@ -148,10 +188,10 @@ function wpuplugincreator_update_dependency(){
     fi;
     if [[ ! -f "${_CLASS_FILE}" ]];then
         if [[ -f "inc/${i}.php" ]];then
-            echo $(bashutilities_message "- “${i}” is installed but invalid !" 'error');
+            bashutilities_message "- “${i}” is installed but invalid !" 'error';
             return 0;
         fi;
-        echo $(bashutilities_message "- “${i}” is not installed." 'warning' 'nowarn');
+        bashutilities_message "- “${i}” is not installed." 'warning' 'nowarn';
         return 0;
     fi;
 
@@ -175,14 +215,14 @@ function wpuplugincreator_update_dependency(){
 
     # Success message
     if [[ "${_v_src}" == "${_v_proj}" ]];then
-        echo $(bashutilities_message  "- “${i}” is already up-to-date." 'success' 'nowarn');
+        bashutilities_message  "- “${i}” is already up-to-date." 'success' 'nowarn';
     else
-        echo $(bashutilities_message "- “${i}” has been updated !" 'success');
+        bashutilities_message "- “${i}” has been updated !" 'success';
     fi;
 }
 
 for i in "${_DEPENDENCY_LIST[@]}"; do
-    echo $(bashutilities_message  "# Updating “${i}” if installed." 'notice' 'nowarn');
+    bashutilities_message  "# Updating “${i}” if installed." 'notice' 'nowarn';
     wpuplugincreator_update_dependency "${i}";
 done;
 
@@ -289,7 +329,7 @@ function wpuplugincreator_migrate_from_master_to_main(){
     if [[ "${_migrate_branch}" == 'y' ]];then
         git add .;
         git branch -m master main;
-        echo $(bashutilities_message  "- The current branch is now 'main'." 'success');
+        bashutilities_message  "- The current branch is now 'main'." 'success';
     fi;
 }
 
