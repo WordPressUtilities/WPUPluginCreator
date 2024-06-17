@@ -65,11 +65,8 @@ function wpuplugincreator_create_github_actions(){
     _default_branch_name=$(git rev-parse --abbrev-ref HEAD);
 
     # Remote
-    _remote_github=$(git config --get remote.origin.url);
-    _remote_github_base=${_remote_github/\.git/};
-    _remote_github=${_remote_github/\.git/\/settings\/actions};
-    _remote_github=${_remote_github/\.git/\/settings\/actions};
-    _remote_github=${_remote_github/git\@github/https\:\/\/github};
+    _remote_github_base=$(wpuplugincreator_get_github_repo_url)
+    _remote_github="${_remote_github_base}/settings/actions";
 
     # Folder
     if [[ ! -d ".github/" ]];then
@@ -157,4 +154,14 @@ function wpuplugincreator_regenerate_languages() {
     fi
     wp i18n make-php "${_dir}"
     echo $(bashutilities_message "- Languages have been regenerated." 'success' 'nowarn')
+}
+
+function wpuplugincreator_get_github_repo_url(){
+    local _remote_github;
+    if git remote get-url origin | grep -q github.com; then
+        _remote_github=$(git config --get remote.origin.url);
+        _remote_github=${_remote_github/\.git/};
+        _remote_github=${_remote_github/git\@github/https\:\/\/github};
+        echo "${_remote_github}";
+    fi
 }
