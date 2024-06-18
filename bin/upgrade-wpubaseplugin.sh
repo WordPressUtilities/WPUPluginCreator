@@ -50,6 +50,23 @@ function wpuplugincreator_upgrade_wpubaseplugin() {
     bashutilities_sed "s/${_version_old_slug}/${_version_new_slug}/g" "${_main_file}"
     bashutilities_sed "s/${_version_main}/${_version_main_new}/g" "${_main_file}"
 
+    # Generate help message
+    local _WPUPLUGINCREATOR_VERSION_NEW=$(bashutilities_version_bump "${_WPUPLUGINCREATOR_VERSION}" "patch");
+
+cat <<EOT
+# Update version
+sed -i '' 's/${_WPUPLUGINCREATOR_VERSION}/${_WPUPLUGINCREATOR_VERSION_NEW}/g' ${_SOURCEDIR}/wpuplugincreator.sh
+
+# Track dir
+git add ${_TOOLSDIR};
+git add ${_SOURCEDIR}/wpuplugincreator.sh;
+
+# Commit message
+git commit -m 'v ${_WPUPLUGINCREATOR_VERSION_NEW}
+
+- Update dependencies'
+EOT
+
 }
 
 wpuplugincreator_upgrade_wpubaseplugin "$@";
