@@ -55,11 +55,11 @@ function wpuplugincreator_upgrade_wpubaseplugin() {
 
 cat <<EOT
 # Update version
-sed -i '' 's/${_WPUPLUGINCREATOR_VERSION}/${_WPUPLUGINCREATOR_VERSION_NEW}/g' ${_SOURCEDIR}/wpuplugincreator.sh
+sed -i '' 's/${_WPUPLUGINCREATOR_VERSION}/${_WPUPLUGINCREATOR_VERSION_NEW}/g' ${_SOURCEDIR}wpuplugincreator.sh
 
 # Track dir
 git add ${_TOOLSDIR};
-git add ${_SOURCEDIR}/wpuplugincreator.sh;
+git add ${_SOURCEDIR}wpuplugincreator.sh;
 
 # Commit message
 git commit -m 'v ${_WPUPLUGINCREATOR_VERSION_NEW}

@@ -26,7 +26,7 @@ page_string=$(cat <<EOF
                 'menu_name' => \$this->plugin_settings['name'],
                 'name' => 'Main page',
                 'settings_link' => true,
-                'settings_name' => __('Settings'),
+                'settings_name' => __('Settings', 'myplugin_id'),
                 'function_content' => array(&\$this,
                     'page_content__main'
                 ),
