@@ -54,6 +54,10 @@ function wpuplugincreator_upgrade_wpubaseplugin() {
     local _WPUPLUGINCREATOR_VERSION_NEW=$(bashutilities_version_bump "${_WPUPLUGINCREATOR_VERSION}" "patch");
 
 cat <<EOT
+
+# Go to the main folder
+cd ${_SOURCEDIR};
+
 # Update version
 sed -i '' 's/${_WPUPLUGINCREATOR_VERSION}/${_WPUPLUGINCREATOR_VERSION_NEW}/g' ${_SOURCEDIR}wpuplugincreator.sh
 
@@ -65,6 +69,10 @@ git add ${_SOURCEDIR}wpuplugincreator.sh;
 git commit -m 'v ${_WPUPLUGINCREATOR_VERSION_NEW}
 
 - Update dependencies'
+
+# Tag
+git tag -a ${_WPUPLUGINCREATOR_VERSION_NEW}
+
 EOT
 
 }

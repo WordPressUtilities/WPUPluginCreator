@@ -71,12 +71,7 @@ _content_
             rm -Rf "${_github_actions_dir}";
             wpuplugincreator_create_github_actions;
         else
-            if [[ -f "${_php_workflow}" ]];then
-                bashutilities_sed "s#actions/checkout@v2#actions/checkout@v3#g" "${_php_workflow}";
-            fi;
-            if [[ -f "${_js_workflow}" ]];then
-                bashutilities_sed "s#actions/checkout@v2#actions/checkout@v3#g" "${_js_workflow}";
-            fi;
+            wpuplugincreator_update_github_actions;
         fi;
     fi;
 
@@ -125,11 +120,16 @@ _content_
     wpuplugincreator_update_main_file_version_replace "Requires PHP" "8.0" "${_plugin_file}";
 
     # Add Network Settings
-    wpuplugincreator_update_main_file_version_replace "Network" "Optional" "${_plugin_file}";
+    if ! grep -q "Network:" "${_plugin_file}"; then
+        wpuplugincreator_update_main_file_version_replace "Network" "Optional" "${_plugin_file}";
+    fi
 
     # Use require_once
     bashutilities_sed "s#include dirname#require_once dirname#g" "${_plugin_file}";
     bashutilities_sed "s#include __DIR__#require_once __DIR__#g" "${_plugin_file}";
+
+    # Add public prefix to methods without visibility
+    bashutilities_sed "s#    function#    public function#g" "${_plugin_file}";
 
     # Uninstall
     wpuplugincreator_update_uninstall "." "${_plugin_id}";
@@ -323,7 +323,8 @@ wpuplugincreator_update_gitignore
 
 function wpuplugincreator_migrate_from_master_to_main(){
     local _migrate_branch='n';
-    if git branch | grep -q "master"; then
+    local _current_branch_name=$(git rev-parse --abbrev-ref HEAD);
+    if [[ "${_current_branch_name}" == 'master' ]];then
         _migrate_branch=$(bashutilities_get_yn "- Do you want to migrate the main branch from master to main ?" 'y');
     fi;
     if [[ "${_migrate_branch}" == 'y' ]];then

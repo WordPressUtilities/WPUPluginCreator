@@ -108,6 +108,32 @@ function wpuplugincreator_create_github_actions(){
     fi;
 }
 
+function wpuplugincreator_update_github_actions(){
+    local _php_file="${_PLUGIN_DIR}.github/workflows/php.yml";
+    local _js_file="${_PLUGIN_DIR}.github/workflows/js.yml";
+    if [[ -f "${_php_file}" ]];then
+        wpuplugincreator_update_github_actions_file "${_php_file}";
+    fi;
+    if [[ -f "${_js_file}" ]];then
+        wpuplugincreator_update_github_actions_file "${_js_file}";
+    fi;
+}
+
+function wpuplugincreator_update_github_actions_file(){
+    local _file="${1}";
+    local _branch_name=$(git rev-parse --abbrev-ref HEAD);
+    local _branch_name_before1='\[ master \]';
+    local _branch_name_before2='\[ main \]';
+    local _branch_name_after="\[ ${_branch_name} \]";
+    if [[ -f "${_file}" ]];then
+        # Fix branch name
+        bashutilities_sed "s/${_branch_name_before1}/${_branch_name_after}/g" "${_file}";
+        bashutilities_sed "s/${_branch_name_before2}/${_branch_name_after}/g" "${_file}";
+        # Update checkout version
+        bashutilities_sed "s#actions/checkout@v2#actions/checkout@v3#g" "${_file}";
+    fi;
+}
+
 # Uninstall
 function wpuplugincreator_update_uninstall(){
     local _uninstall_file="${1}/uninstall.php";
