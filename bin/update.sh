@@ -330,6 +330,7 @@ function wpuplugincreator_migrate_from_master_to_main(){
     if [[ "${_migrate_branch}" == 'y' ]];then
         git add .;
         git branch -m master main;
+        wpuplugincreator_update_github_actions;
         local _remote_github_base=$(wpuplugincreator_get_github_repo_url);
         bashutilities_message  "- The current branch is now 'main'." 'success';
         bashutilities_message "Do not forget to change the default branch in the repository settings: ${_remote_github_base}/settings/branches" 'warning';
