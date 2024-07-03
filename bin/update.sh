@@ -39,12 +39,18 @@ function wpuplugincreator_update_main_file(){
     # Update loading method of textdomain
     if ! grep -q load_muplugin_textdomain "${_plugin_file}" && grep -q load_plugin_textdomain "${_plugin_file}"; then
         bashutilities_sed "s/load_plugin_textdomain('.*/##marker_textdomain##/g" "${_plugin_file}";
+
+        local _plugin_desc=$(bashutilities_search_extract_file "Description: " "" "${_plugin_file}");
+        if [[ "${_plugin_desc}" == "" ]];then
+            _plugin_desc="PLUGIN DESCRIPTION";
+        fi;
+
         local _content=$(cat << _content_
 \$lang_dir = dirname(plugin_basename(__FILE__)) . '/lang/';
 if (!load_plugin_textdomain('${_plugin_id}', false, \$lang_dir)) {
     load_muplugin_textdomain('${_plugin_id}', \$lang_dir);
 }
-\$this->plugin_description = __('PLUGIN DESCRIPTION', '${_plugin_id}');
+\$this->plugin_description = __('${_plugin_desc}', '${_plugin_id}');
 _content_
 );
         bashutilities_add_after_marker '##marker_textdomain##' "${_content}" "${_plugin_file}";
