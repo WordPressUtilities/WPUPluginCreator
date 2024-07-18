@@ -71,7 +71,7 @@ git commit -m 'v ${_WPUPLUGINCREATOR_VERSION_NEW}
 - Update dependencies'
 
 # Tag
-git tag -a ${_WPUPLUGINCREATOR_VERSION_NEW}
+git tag -a ${_WPUPLUGINCREATOR_VERSION_NEW} -m ""
 
 EOT
 
