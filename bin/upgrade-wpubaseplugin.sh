@@ -66,7 +66,10 @@ ${_module_name} v ${_version_new} :
 - Updated this feature'
 
 # Tag
-git tag -a ${_version_main_new} -m ""
+git tag -a ${_version_main_new} -m "";
+
+# Push
+git push;
 
 # Go to the main folder
 cd ${_SOURCEDIR};

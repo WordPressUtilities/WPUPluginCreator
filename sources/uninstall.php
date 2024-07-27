@@ -5,6 +5,8 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 
 /* Delete options */
 $options = array(
+    'wpuplugincreatorpluginid__cron_hook_croninterval',
+    'wpuplugincreatorpluginid__cron_hook_lastexec',
     'wpuplugincreatorpluginid_options',
     'wpuplugincreatorpluginid_wpuplugincreatorpluginid_version'
 );
