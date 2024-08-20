@@ -17,8 +17,11 @@ _wpuplugincreator_complete() {
         COMPREPLY=($(compgen -W "add create help plugin-check regenerate-lang self-update src update upgrade-wpubaseplugin" -- $cur))
     elif [ $COMP_CWORD -eq 2 ]; then
         case "${prev}" in
-        'add' | 'upgrade-wpubaseplugin')
-            COMPREPLY=($(compgen -W "${modules_list}" -- $cur))
+            'add' | 'upgrade-wpubaseplugin')
+                COMPREPLY=($(compgen -W "${modules_list}" -- $cur))
+            ;;
+            'update')
+                COMPREPLY=($(compgen -W "all only-dependencies" -- $cur))
             ;;
         esac
     fi

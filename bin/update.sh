@@ -141,7 +141,7 @@ _content_
     wpuplugincreator_update_uninstall "." "${_plugin_id}";
 
 }
-wpuplugincreator_update_main_file;
+
 
 ###################################
 ## License
@@ -181,7 +181,6 @@ function wpuplugincreator_update_license(){
     fi;
 }
 
-wpuplugincreator_update_license
 
 ###################################
 ## Dependencies
@@ -232,6 +231,7 @@ for i in "${_DEPENDENCY_LIST[@]}"; do
     wpuplugincreator_update_dependency "${i}";
 done;
 
+
 ###################################
 ## Protection
 ###################################
@@ -256,7 +256,6 @@ function wpuplugincreator_update_protect(){
     echo "- All directories have been protected."
 }
 
-wpuplugincreator_update_protect;
 
 ###################################
 ## Check code
@@ -275,7 +274,6 @@ function wpuplugincreator_update_check_code(){
     php "${_TOOLSDIR}/update-code.php" "${_PLUGIN_DIR}/${_plugin_file}";
 }
 
-wpuplugincreator_update_check_code;
 
 ###################################
 ## Check abspath protection
@@ -301,7 +299,6 @@ function wpuplugincreator_update_add_abspath_protection() {
     done
 }
 
-wpuplugincreator_update_add_abspath_protection
 
 ###################################
 ## Check abspath protection
@@ -321,7 +318,6 @@ function wpuplugincreator_update_gitignore() {
     fi
 }
 
-wpuplugincreator_update_gitignore
 
 ###################################
 ## Check main branch
@@ -344,4 +340,20 @@ function wpuplugincreator_migrate_from_master_to_main(){
     fi;
 }
 
+
+###################################
+## Calls
+###################################
+
+if [[ "${2}" == "only-dependencies" ]];then
+    bashutilities_message  "# Only dependencies have been updated." 'success';
+    return;
+fi;
+
+wpuplugincreator_update_main_file;
+wpuplugincreator_update_license;
+wpuplugincreator_update_protect;
+wpuplugincreator_update_check_code;
+wpuplugincreator_update_add_abspath_protection;
+wpuplugincreator_update_gitignore;
 wpuplugincreator_migrate_from_master_to_main;
