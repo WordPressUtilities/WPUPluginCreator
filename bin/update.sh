@@ -137,6 +137,9 @@ _content_
     # Add public prefix to methods without visibility
     bashutilities_sed "s#    function#    public function#g" "${_plugin_file}";
 
+    # Avoid double semicolon
+    bashutilities_sed "s#;;#;#g" "${_plugin_file}";
+
     # Uninstall
     wpuplugincreator_update_uninstall "." "${_plugin_id}";
 
