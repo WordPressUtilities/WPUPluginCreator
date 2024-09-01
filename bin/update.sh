@@ -153,6 +153,7 @@ _content_
 function wpuplugincreator_update_license(){
     local _license_file="LICENSE";
     local _need_license_file="y";
+    local _current_license_content='';
     local _mode='update';
 
     # Stop if repo is not from github
@@ -165,6 +166,8 @@ function wpuplugincreator_update_license(){
         _mode='create';
         echo '- No license file found.';
         _need_license_file=$(bashutilities_get_yn "- Do you want to add a license file ?" 'y');
+    else
+        _current_license_content=$(cat "${_license_file}");
     fi;
 
     if [[ "${_need_license_file}" == 'n' ]];then
@@ -180,7 +183,11 @@ function wpuplugincreator_update_license(){
     if [[ "${_mode}" == 'create' ]];then
         bashutilities_message  "- License file has been created." 'success';
     else
-        bashutilities_message  "- License file has been updated." 'success';
+        if [[ "${_current_license_content}" == "${_license_content_new}" ]];then
+            bashutilities_message  "- License file is already up-to-date." 'success' 'nowarn';
+        else
+            bashutilities_message  "- License file has been updated." 'success';
+        fi;
     fi;
 }
 
