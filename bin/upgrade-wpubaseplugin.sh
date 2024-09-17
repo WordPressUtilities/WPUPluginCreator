@@ -69,7 +69,7 @@ ${_module_name} v ${_version_new} :
 git tag -a ${_version_main_new} -m "";
 
 # Push
-git push;
+git push --tags;
 
 # Go to the main folder
 cd ${_SOURCEDIR};
