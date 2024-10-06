@@ -33,7 +33,12 @@ function wpuplugincreator_upgrade_wpubaseplugin() {
     echo "Current version is: ${_version}"
     echo "Do you want to update the version to a major, minor, or patch ?"
 
-    _upgrade_type=$(bashutilities_get_user_var "- What is the upgrade type ?")
+    _upgrade_type=$(bashutilities_get_user_var "- What is the upgrade type ?" "minor")
+    if [[ "${_upgrade_type}" != "major" && "${_upgrade_type}" != "minor" && "${_upgrade_type}" != "patch" ]]; then
+        echo "Invalid upgrade type"
+        return 0
+    fi
+
     _version_new=$(bashutilities_version_bump "${_version}" "${_upgrade_type}")
 
     # Update module version slug
