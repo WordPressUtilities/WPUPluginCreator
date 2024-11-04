@@ -88,7 +88,7 @@ function wpuplugincreator_create_github_actions(){
     fi;
 
     # JS
-    if [[ -d "${_PLUGIN_DIR}assets" ]];then
+    if [[ -d "${_PLUGIN_DIR}assets" && $(find "${_PLUGIN_DIR}assets/" -name "*.js" | wc -l) -gt 0 ]]; then
         local _js_file="${_PLUGIN_DIR}.github/workflows/js.yml";
         if [[ ! -f "${_js_file}" ]];then
             _new_action='1';
