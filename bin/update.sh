@@ -134,6 +134,9 @@ _content_
     bashutilities_sed "s#include dirname#require_once dirname#g" "${_plugin_file}";
     bashutilities_sed "s#include __DIR__#require_once __DIR__#g" "${_plugin_file}";
 
+    # Fix invalid hooks
+    bashutilities_sed "s#add_filter('plugins_loaded'#add_action('plugins_loaded'#g" "${_plugin_file}";
+
     # Add public prefix to methods without visibility
     bashutilities_sed "s#    function#    public function#g" "${_plugin_file}";
 
