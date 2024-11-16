@@ -178,7 +178,7 @@ function wpuplugincreator_regenerate_languages() {
     if ls "${_dir}"/*.l10n.php &>/dev/null; then
         rm "${_dir}"/*.l10n.php
     fi
-    wp i18n make-php "${_dir}"
+    wpuplugincreator_wpcli_command i18n make-php "${_dir}"
     echo $(bashutilities_message "- Languages have been regenerated." 'success' 'nowarn')
 }
 
