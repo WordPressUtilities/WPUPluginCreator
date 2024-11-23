@@ -47,8 +47,10 @@ function wpuplugincreator_update_main_file(){
 
         local _content=$(cat << _content_
 \$lang_dir = dirname(plugin_basename(__FILE__)) . '/lang/';
-if (!load_plugin_textdomain('${_plugin_id}', false, \$lang_dir)) {
+if (strpos(__DIR__, 'mu-plugins') !== false) {
     load_muplugin_textdomain('${_plugin_id}', \$lang_dir);
+} else {
+    load_plugin_textdomain('${_plugin_id}', false, \$lang_dir);
 }
 \$this->plugin_description = __('${_plugin_desc}', '${_plugin_id}');
 _content_
@@ -56,6 +58,11 @@ _content_
         bashutilities_add_after_marker '##marker_textdomain##' "${_content}" "${_plugin_file}";
         bashutilities_sed "s/##marker_textdomain##//g" "${_plugin_file}";
         echo '- Update lang loading method.'
+    fi
+
+    # Detect an invalid check
+    if grep -q "!load_plugin_textdomain" "${_plugin_file}"; then
+        bashutilities_message  "- The check with load_plugin_textdomain is not recommended." 'warning';
     fi
 
     # Github actions

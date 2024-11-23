@@ -63,6 +63,10 @@ function wpuplugincreator_create_github_actions(){
     fi
 
     _default_branch_name=$(git rev-parse --abbrev-ref HEAD);
+    if [[ "${_default_branch_name}" == 'HEAD' ]];then
+        bashutilities_message "- Current branch name is HEAD, using main as default branch name." 'warning';
+        _default_branch_name='main';
+    fi;
 
     # Remote
     _remote_github_base=$(wpuplugincreator_get_github_repo_url)
@@ -122,6 +126,11 @@ function wpuplugincreator_update_github_actions(){
 function wpuplugincreator_update_github_actions_file(){
     local _file="${1}";
     local _branch_name=$(git rev-parse --abbrev-ref HEAD);
+    if [[ "${_branch_name}" == 'HEAD' ]];then
+        bashutilities_message "- Current branch name is HEAD, using main as default branch name." 'warning';
+        _branch_name='main';
+    fi;
+
     local _branch_name_before1='\[ master \]';
     local _branch_name_before2='\[ main \]';
     local _branch_name_after="\[ ${_branch_name} \]";
