@@ -65,6 +65,11 @@ _content_
         bashutilities_message  "- The check with load_plugin_textdomain is not recommended." 'warning';
     fi
 
+    # Detect if not hooks target after_setup_theme or init
+    if ! grep -q "add_action('after_setup_theme'" "${_plugin_file}" && ! grep -q "add_action('init'" "${_plugin_file}"; then
+        bashutilities_message  "- No hooks target after_setup_theme or init, translation may be loaded incorrectly." 'warning';
+    fi
+
     # Github actions
     local _github_actions_dir=".github/workflows/";
     local _php_workflow="${_github_actions_dir}php.yml";
