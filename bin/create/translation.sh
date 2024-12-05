@@ -16,8 +16,11 @@ echo '# Load Translation file';
 translation_string="";
 translation_string=$(cat <<EOF
         # TRANSLATION
-        if (!load_plugin_textdomain('myplugin_id', false, dirname(plugin_basename(__FILE__)) . '/lang/')) {
-            load_muplugin_textdomain('myplugin_id', dirname(plugin_basename(__FILE__)) . '/lang/');
+        \$lang_dir = dirname(plugin_basename(__FILE__)) . '/lang/';
+        if (strpos(__DIR__, 'mu-plugins') !== false) {
+            load_muplugin_textdomain('myplugin_id', \$lang_dir);
+        } else {
+            load_plugin_textdomain('myplugin_id', false, \$lang_dir);
         }
         \$this->plugin_description = __('myplugin_name is a wonderful plugin.', 'myplugin_id');
 EOF
