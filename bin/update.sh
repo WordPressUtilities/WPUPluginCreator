@@ -1,6 +1,16 @@
 #!/bin/bash
 
 ###################################
+## Check if it's a plugin folder
+###################################
+
+if [[ $(pwd) == *"wp-content/themes"* ]];then
+    bashutilities_message  "This is a theme folder, not a plugin folder." 'error';
+    return;
+fi;
+
+
+###################################
 ## Update on main file
 ###################################
 
@@ -154,6 +164,9 @@ _content_
 
     # Avoid double semicolon
     bashutilities_sed "s#;;#;#g" "${_plugin_file}";
+
+    # Replace strip_tags by wp_strip_all_tags
+    bashutilities_sed "s#strip_tags(#wp_strip_all_tags(#g" "${_plugin_file}";
 
     # Uninstall
     wpuplugincreator_update_uninstall "." "${_plugin_id}";
