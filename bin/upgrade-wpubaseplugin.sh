@@ -94,6 +94,9 @@ git commit -m 'v ${_WPUPLUGINCREATOR_VERSION_NEW}
 # Tag
 git tag -a ${_WPUPLUGINCREATOR_VERSION_NEW} -m ""
 
+# Push
+git push --tags;git push;
+
 EOT
 
 }
