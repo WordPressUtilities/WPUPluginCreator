@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Clear all functions
 unset -f wpuplugincreator_add_dependency;
 unset -f wpuplugincreator_create_github_actions;
 unset -f wpuplugincreator_create_inc;
@@ -8,6 +9,7 @@ unset -f wpuplugincreator_get_github_repo_url;
 unset -f wpuplugincreator_has_github_actions;
 unset -f wpuplugincreator_install_wpcli;
 unset -f wpuplugincreator_migrate_from_master_to_main;
+unset -f wpuplugincreator_plugin_id;
 unset -f wpuplugincreator_protect_dir;
 unset -f wpuplugincreator_regenerate_languages;
 unset -f wpuplugincreator_remove_markers;
@@ -27,3 +29,8 @@ unset -f wpuplugincreator_update_protect;
 unset -f wpuplugincreator_update_uninstall;
 unset -f wpuplugincreator_upgrade_wpubaseplugin;
 unset -f wpuplugincreator_wpcli_command;
+
+# Clear variables
+unset -v wpuplugincreator__translation_string;
+unset -v wpuplugincreator__translation_file;
+unset -v wpuplugincreator__translation_dir;

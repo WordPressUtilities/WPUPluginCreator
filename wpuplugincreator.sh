@@ -2,7 +2,7 @@
 
 WPUPluginCreator(){
 
-local _WPUPLUGINCREATOR_VERSION='0.45.11';
+local _WPUPLUGINCREATOR_VERSION='0.46.0';
 local _SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
 local _TOOLSDIR="${_SOURCEDIR}sources/";
 local _CURRENT_DIR="$( pwd )/";
@@ -61,7 +61,7 @@ case "${1}" in
     'upgrade-wpubaseplugin' )
         . "${_SOURCEDIR}bin/${1}.sh";
     ;;
-    'add' | 'plugin-check' | 'regenerate-lang' | 'self-update' )
+    'add' | 'new-lang' | 'plugin-check' | 'regenerate-lang' | 'self-update' )
         . "${_SOURCEDIR}bin/find-folder.sh";
         . "${_SOURCEDIR}bin/${1}.sh";
     ;;
