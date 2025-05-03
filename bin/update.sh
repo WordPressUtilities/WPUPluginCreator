@@ -47,7 +47,7 @@ function wpuplugincreator_update_main_file(){
     fi;
 
     # Update loading method of textdomain
-    if ! grep -q load_muplugin_textdomain "${_plugin_file}" && grep -q load_plugin_textdomain "${_plugin_file}"; then
+    if [ -d "${_PLUGIN_DIR}lang" ] && ! grep -q load_muplugin_textdomain "${_plugin_file}" && grep -q load_plugin_textdomain "${_plugin_file}"; then
         bashutilities_sed "s/load_plugin_textdomain('.*/##marker_textdomain##/g" "${_plugin_file}";
 
         local _plugin_desc=$(bashutilities_search_extract_file "Description: " "" "${_plugin_file}");
