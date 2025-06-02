@@ -48,7 +48,7 @@ for i in "${_DEPENDENCY_LIST[@]}"; do
     wpuplugincreator_add_dependency "${i}";
 done;
 
-if [[ -f ".git/config" ]];then
+if [[ -f ".git/config" || -f ".git" ]];then
     wpuplugincreator_has_github_actions=$(bashutilities_get_yn "- Install Github Actions ?" 'y');
     if [[ "${wpuplugincreator_has_github_actions}" == 'y' ]];then
         wpuplugincreator_create_github_actions;
