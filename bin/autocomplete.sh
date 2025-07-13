@@ -20,6 +20,9 @@ _wpuplugincreator_complete() {
             'add' | 'upgrade-wpubaseplugin')
                 COMPREPLY=($(compgen -W "${modules_list}" -- $cur))
             ;;
+            'new-lang')
+                COMPREPLY=($(compgen -W "en_US es_ES fr_FR de_DE it_IT pt_BR ru_RU zh_CN ja_JP nl_NL" -- $cur))
+            ;;
             'update')
                 COMPREPLY=($(compgen -W "all only-dependencies" -- $cur))
             ;;
