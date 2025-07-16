@@ -10,6 +10,7 @@ unset -f wpuplugincreator_has_github_actions;
 unset -f wpuplugincreator_install_wpcli;
 unset -f wpuplugincreator_migrate_from_master_to_main;
 unset -f wpuplugincreator_plugin_id;
+unset -f wpuplugincreator_plugin_file;
 unset -f wpuplugincreator_protect_dir;
 unset -f wpuplugincreator_regenerate_languages;
 unset -f wpuplugincreator_remove_markers;
