@@ -4,7 +4,7 @@
 ## Check if it's a plugin folder
 ###################################
 
-if [[ $(pwd) == *"wp-content/themes"* ]];then
+if [[ $(pwd) == *"wp-content/themes"* && "${2}" != "only-dependencies"  ]];then
     bashutilities_message  "This is a theme folder, not a plugin folder." 'error';
     return;
 fi;
