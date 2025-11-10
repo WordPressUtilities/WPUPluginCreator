@@ -6,7 +6,7 @@
 
 function wpuplugincreator_upgrade_wpubaseplugin() {
     local _wpu_path="${_TOOLSDIR}wpubaseplugin/"
-    local _module_name _module_name_prefix _version _version_new _version_old_slug _version_new_slug _version_main _version_main_new _upgrade_type;
+    local _module_name _module_name_prefix _version _version_new _version_old_slug _version_new_slug _version_main _version_main_new _upgrade_type _whats_new;
 
     # Ask module name
     if [[ ! -z "$2" ]]; then
@@ -39,6 +39,11 @@ function wpuplugincreator_upgrade_wpubaseplugin() {
         return 0
     fi
 
+    _whats_new=$(bashutilities_get_user_var "- What is new in this version ?");
+    if [[ -z "${_whats_new}" ]]; then
+        _whats_new="Updated this feature"
+    fi
+
     _version_new=$(bashutilities_version_bump "${_version}" "${_upgrade_type}")
 
     # Update module version slug
@@ -68,7 +73,7 @@ git add .;
 git commit -m 'v ${_version_main_new}
 
 ${_module_name} v ${_version_new} :
-- Updated this feature'
+- ${_whats_new}
 
 # Tag
 git tag -a ${_version_main_new} -m "";
