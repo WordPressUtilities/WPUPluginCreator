@@ -73,7 +73,7 @@ git add .;
 git commit -m 'v ${_version_main_new}
 
 ${_module_name} v ${_version_new} :
-- ${_whats_new}
+- ${_whats_new}';
 
 # Tag
 git tag -a ${_version_main_new} -m "";
