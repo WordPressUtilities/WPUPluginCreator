@@ -6,6 +6,7 @@ unset -f wpuplugincreator_create_github_actions;
 unset -f wpuplugincreator_create_inc;
 unset -f wpuplugincreator_find_folder;
 unset -f wpuplugincreator_get_github_repo_url;
+unset -f wpuplugincreator_get_plugin_id;
 unset -f wpuplugincreator_has_github_actions;
 unset -f wpuplugincreator_install_wpcli;
 unset -f wpuplugincreator_migrate_from_master_to_main;

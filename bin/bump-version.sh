@@ -6,7 +6,7 @@
 
 
 function wpuplugincreator__bump_version(){
-    local _plugin_id=$(basename "${_CURRENT_DIR}");
+    local _plugin_id=$(wpuplugincreator_get_plugin_id);
     local _plugin_file="${_plugin_id}.php";
     local _version _version_new _upgrade_type;
     local _upgrade_types=("major" "minor" "patch");

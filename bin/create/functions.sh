@@ -206,3 +206,28 @@ function wpuplugincreator_get_github_repo_url(){
         echo "${_remote_github}";
     fi
 }
+
+function wpuplugincreator_get_plugin_id(){
+    local _plugin_id;
+    local _tmp_plugin_id=$(basename "${_CURRENT_DIR}");
+    if [ -f "${_CURRENT_DIR}/${_tmp_plugin_id}.php" ]; then
+        echo "${_tmp_plugin_id}";
+        return 0;
+    fi;
+
+    local _php_file
+    local _text_domain
+    for _php_file in "${_CURRENT_DIR}"/*.php; do
+        if [[ ! -f "${_php_file}" ]]; then
+            continue
+        fi
+        _text_domain=$(grep -i -m1 'Text Domain:' "${_php_file}" 2>/dev/null | cut -d: -f2- | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
+        if [[ -n "${_text_domain}" ]]; then
+            echo "${_text_domain}"
+            return 0
+        fi
+    done
+
+    read -p "- Plugin main file not found. Please provide the plugin id (folder name) : " _plugin_id;
+    echo "${_plugin_id}";
+}

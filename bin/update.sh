@@ -37,7 +37,7 @@ function wpuplugincreator_update_main_file_version_replace(){
 # Main function
 
 function wpuplugincreator_update_main_file(){
-    local _plugin_id=$(basename "${_CURRENT_DIR}");
+    local _plugin_id=$(wpuplugincreator_get_plugin_id);
     local _PLUGIN_DIR="./";
     local _plugin_file="${_plugin_id}.php";
 
@@ -300,7 +300,7 @@ function wpuplugincreator_update_protect(){
 ###################################
 
 function wpuplugincreator_update_check_code(){
-    local _plugin_id=$(basename "${_CURRENT_DIR}");
+    local _plugin_id=$(wpuplugincreator_get_plugin_id);
     local _PLUGIN_DIR="./";
     local _plugin_file="${_plugin_id}.php";
 

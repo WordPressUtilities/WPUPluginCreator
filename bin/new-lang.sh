@@ -4,7 +4,7 @@
 ## New lang
 ###################################
 
-plugin_id=$(basename "${_CURRENT_DIR}");
+plugin_id=$(wpuplugincreator_get_plugin_id);
 wpuplugincreator__translation_dir="${_PLUGIN_DIR}lang/";
 if [ ! -d "${wpuplugincreator__translation_dir}" ]; then
     echo '- Translation directory not found.';
