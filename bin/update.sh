@@ -339,7 +339,7 @@ function wpuplugincreator_update_add_abspath_protection() {
 
 
 ###################################
-## Check abspath protection
+## Check .gitignore
 ###################################
 
 function wpuplugincreator_update_gitignore() {
@@ -356,6 +356,59 @@ function wpuplugincreator_update_gitignore() {
     fi
 }
 
+###################################
+## Check translations
+###################################
+
+function wpuplugincreator_update_translations(){
+    if [ ! -d "${_PLUGIN_DIR}lang" ]; then
+        return 0;
+    fi;
+
+    # Find all .po files in the lang directory and check that they all contain the same number of entries
+    local nb_entries=-1;
+    local _msgid_count;
+    local inconsistent_files=();
+    local po_file;
+    local missing_count;
+    local files_with_missing_translations=();
+    for po_file in "${_PLUGIN_DIR}lang/"*.po; do
+        if [ -f "$po_file" ]; then
+            _msgid_count=$(grep -c '^msgid ' "$po_file");
+            if [ $nb_entries -eq -1 ]; then
+                nb_entries=$_msgid_count;
+            elif [ $_msgid_count -ne $nb_entries ]; then
+                inconsistent_files+=("$po_file");
+            fi;
+
+            # Check for empty msgstr entries
+            missing_count=$(grep -c '^msgstr ""$' "$po_file");
+            if [ $missing_count -gt 0 ]; then
+                files_with_missing_translations+=("$po_file");
+            fi;
+        fi;
+    done;
+
+    if [ ${#inconsistent_files[@]} -gt 0 ]; then
+        bashutilities_message "- The following translation files have an inconsistent number of entries:" 'warning';
+        for po_file in "${inconsistent_files[@]}"; do
+            bashutilities_message "  - $po_file" 'warning';
+        done;
+    else
+        bashutilities_message "- All translation files are consistent with ${nb_entries} entries." 'success' 'nowarn';
+    fi;
+
+    if [ ${#files_with_missing_translations[@]} -gt 0 ]; then
+        bashutilities_message "- The following translation files have missing translations:" 'warning';
+        for po_file in "${files_with_missing_translations[@]}"; do
+            bashutilities_message "  - $po_file" 'warning';
+        done;
+        bashutilities_message "Please complete the translations in these files." 'warning';
+    else
+        bashutilities_message "- No missing translations found in the translation files." 'success' 'nowarn';
+    fi;
+
+}
 
 ###################################
 ## Check main branch
@@ -394,4 +447,5 @@ wpuplugincreator_update_protect;
 wpuplugincreator_update_check_code;
 wpuplugincreator_update_add_abspath_protection;
 wpuplugincreator_update_gitignore;
+wpuplugincreator_update_translations;
 wpuplugincreator_migrate_from_master_to_main;
