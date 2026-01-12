@@ -37,9 +37,9 @@ function wpuplugincreator__bump_version(){
 
     if [ "${_upgrade_type}" == "" ]; then
         echo "- What is the upgrade type ?"
-        select _upgrade_type in "${_upgrade_types[@]}"; do
-            if [[ -n "$_upgrade_type" ]]; then
-                upgrade_type="$_upgrade_type"
+        select upgrade_type in "${_upgrade_types[@]}"; do
+            if [[ -n "$upgrade_type" ]]; then
+                _upgrade_type="$upgrade_type"
                 break
             else
                 echo "Invalid type. Please try again.";

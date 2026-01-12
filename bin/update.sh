@@ -320,7 +320,9 @@ function wpuplugincreator_update_check_code(){
 function wpuplugincreator_update_add_abspath_protection() {
     local start_of_file;
     # Find and process all PHP files in the directory and subdirectories
-    find "." -type f -name "*.php" | while read file; do
+    find . \
+        -type d \( -name node_modules -o -name vendor -o -name .git \) -prune -o \
+        -type f -name "*.php" -print | while read -r file; do
         # Check if the file does not contain "defined('ABSPATH')" or "wp-load.php" and contains more than a line
         if ! grep -q "defined('ABSPATH')" "$file" && [ $(grep -c . "$file") -gt 1 ] && [[ "$file" != *"l10n.php" ]] && ! grep -q "wp-load.php" "$file"; then
             start_of_file=$(head -n 1 "$file");
