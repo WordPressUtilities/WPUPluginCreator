@@ -31,5 +31,6 @@ fi;
 
 bashutilities_bury_copy "${_TOOLSDIR}translation.po" "${wpuplugincreator__translation_file}";
 wpuplugincreator_set_values "${wpuplugincreator__translation_file}";
+bashutilities_sed "s/fr_FR/${translation_lang}/g" "${wpuplugincreator__translation_file}";
 
 echo "- Translation file for ${translation_lang} was created.";
