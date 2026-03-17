@@ -161,6 +161,8 @@ _content_
 
     # Add public prefix to methods without visibility
     bashutilities_sed "s#    function#    public function#g" "${_plugin_file}";
+    # Fix for anonymous functions
+    bashutilities_sed "s#public function (#function (#g" "${_plugin_file}";
 
     # Avoid double semicolon
     bashutilities_sed "s#;;#;#g" "${_plugin_file}";
