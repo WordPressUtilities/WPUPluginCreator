@@ -316,6 +316,23 @@ function wpuplugincreator_update_check_code(){
 
 
 ###################################
+## Check unescaped translations in attributes
+###################################
+
+function wpuplugincreator_update_check_unescaped_translations(){
+    local _unescaped_results;
+    _unescaped_results=$(find . \
+        -type d \( -name node_modules -o -name vendor -o -name .git \) -prune -o \
+        -type f -name "*.php" -print0 | xargs -0 grep -Hn '"'"'"' \. _' 2>/dev/null);
+    if [[ -n "${_unescaped_results}" ]]; then
+        bashutilities_message "- Unescaped translation in attribute detected (use esc_attr__ or esc_html__):" 'error';
+        while IFS= read -r line; do
+            echo "-  ${line}";
+        done <<< "${_unescaped_results}";
+    fi;
+}
+
+###################################
 ## Check abspath protection
 ###################################
 
@@ -451,5 +468,6 @@ wpuplugincreator_update_protect;
 wpuplugincreator_update_check_code;
 wpuplugincreator_update_add_abspath_protection;
 wpuplugincreator_update_gitignore;
+wpuplugincreator_update_check_unescaped_translations;
 wpuplugincreator_update_translations;
 wpuplugincreator_migrate_from_master_to_main;
