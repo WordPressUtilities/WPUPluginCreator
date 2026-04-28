@@ -80,29 +80,6 @@ _content_
         bashutilities_message  "- No hooks target after_setup_theme or init, translation may be loaded incorrectly." 'warning';
     fi
 
-    # Github actions
-    local _github_actions_dir=".github/workflows/";
-    local _php_workflow="${_github_actions_dir}php.yml";
-    local _js_workflow="${_github_actions_dir}js.yml";
-    if [[ ! -d "${_github_actions_dir}" ]];then
-        local _has_github_actions='n';
-        if git remote -v | grep -q 'github.com'; then
-            _has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
-        fi
-        if [[ "${_has_github_actions}" == 'y' ]];then
-            wpuplugincreator_create_github_actions;
-        fi;
-    else
-        bashutilities_message  "- Github actions are already installed." 'success' 'nowarn';
-        local _reinstall_github_actions=$(bashutilities_get_yn "- Do you want to reinstall github actions ?" 'n');
-        if [[ "${_reinstall_github_actions}" == 'y' ]];then
-            rm -Rf "${_github_actions_dir}";
-            wpuplugincreator_create_github_actions;
-        else
-            wpuplugincreator_update_github_actions;
-        fi;
-    fi;
-
     # Fix button call
     bashutilities_sed "s/echo submit_button/submit_button/g" "${_plugin_file}";
 
@@ -116,7 +93,7 @@ _content_
     fi;
 
     # Replace dirname
-    if grep -q "dirname" "${_plugin_file}";then
+    if grep -q "dirname( __FI" "${_plugin_file}" || grep -q "dirname(__FI" "${_plugin_file}"; then
         bashutilities_sed "s/dirname( __FILE__ )/__DIR__/g" "${_plugin_file}";
         bashutilities_sed "s/dirname(__FILE__)/__DIR__/g" "${_plugin_file}";
         echo '- Replaced dirname( __FILE__ ) by __DIR__.'
@@ -175,6 +152,34 @@ _content_
 
 }
 
+###################################
+## Update github actions
+###################################
+
+function wpuplugincreator_update_check_github_actions(){
+    # Github actions
+    local _github_actions_dir=".github/workflows/";
+    local _php_workflow="${_github_actions_dir}php.yml";
+    local _js_workflow="${_github_actions_dir}js.yml";
+    if [[ ! -d "${_github_actions_dir}" ]];then
+        local _has_github_actions='n';
+        if git remote -v | grep -q 'github.com'; then
+            _has_github_actions=$(bashutilities_get_yn "- Do you need github actions ?" 'y');
+        fi
+        if [[ "${_has_github_actions}" == 'y' ]];then
+            wpuplugincreator_create_github_actions;
+        fi;
+    else
+        bashutilities_message  "- Github actions are already installed." 'success' 'nowarn';
+        local _reinstall_github_actions=$(bashutilities_get_yn "- Do you want to reinstall github actions ?" 'n');
+        if [[ "${_reinstall_github_actions}" == 'y' ]];then
+            rm -Rf "${_github_actions_dir}";
+            wpuplugincreator_create_github_actions;
+        else
+            wpuplugincreator_update_github_actions;
+        fi;
+    fi;
+}
 
 ###################################
 ## License
@@ -393,6 +398,7 @@ function wpuplugincreator_update_translations(){
     local po_file;
     local missing_count;
     local files_with_missing_translations=();
+    local full_keywords_list="X-Poedit-KeywordsList: __;_e;_x:1,2c;_n:1,2;esc_attr__;esc_html__;esc_attr_e;esc_html_e";
     for po_file in "${_PLUGIN_DIR}lang/"*.po; do
         if [ -f "$po_file" ]; then
             _msgid_count=$(grep -c '^msgid ' "$po_file");
@@ -406,6 +412,17 @@ function wpuplugincreator_update_translations(){
             missing_count=$(grep -c '^msgstr ""$' "$po_file");
             if [ $missing_count -gt 0 ]; then
                 files_with_missing_translations+=("$po_file");
+            fi;
+
+            # Ensure X-Poedit-KeywordsList is consistent
+            if ! grep -q "${full_keywords_list}" "$po_file"; then
+                # Add or update the X-Poedit-KeywordsList
+                if grep -q "^\"X-Poedit-KeywordsList:" "$po_file"; then
+                    bashutilities_sed "s/^\"X-Poedit-KeywordsList:.*$/\"${full_keywords_list}\"/g" "$po_file";
+                else
+                    bashutilities_add_before_marker "^\"Language:" "\"${full_keywords_list}\\\\n\"" "$po_file";
+                fi;
+                echo "- Updated X-Poedit-KeywordsList in ${po_file}."
             fi;
         fi;
     done;
@@ -470,4 +487,5 @@ wpuplugincreator_update_add_abspath_protection;
 wpuplugincreator_update_gitignore;
 wpuplugincreator_update_check_unescaped_translations;
 wpuplugincreator_update_translations;
+wpuplugincreator_update_check_github_actions;
 wpuplugincreator_migrate_from_master_to_main;
