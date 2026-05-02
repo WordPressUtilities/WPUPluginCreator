@@ -418,7 +418,7 @@ function wpuplugincreator_update_translations(){
             if ! grep -q "${full_keywords_list}" "$po_file"; then
                 # Add or update the X-Poedit-KeywordsList
                 if grep -q "^\"X-Poedit-KeywordsList:" "$po_file"; then
-                    bashutilities_sed "s/^\"X-Poedit-KeywordsList:.*$/\"${full_keywords_list}\"/g" "$po_file";
+                    bashutilities_sed "s/^\"X-Poedit-KeywordsList:.*$/\"${full_keywords_list}\\\\n\"/g" "$po_file";
                 else
                     bashutilities_add_before_marker "^\"Language:" "\"${full_keywords_list}\\\\n\"" "$po_file";
                 fi;
