@@ -398,7 +398,8 @@ function wpuplugincreator_update_translations(){
     local po_file;
     local missing_count;
     local files_with_missing_translations=();
-    local full_keywords_list="X-Poedit-KeywordsList: __;_e;_x:1,2c;_n:1,2;esc_attr__;esc_html__;esc_attr_e;esc_html_e";
+    local keywords_list_val="__;_e;_x:1,2c;_n:1,2;esc_attr__;esc_html__;esc_attr_e;esc_html_e";
+    local full_keywords_list="X-Poedit-KeywordsList: ${keywords_list_val}";
     for po_file in "${_PLUGIN_DIR}lang/"*.po; do
         if [ -f "$po_file" ]; then
             _msgid_count=$(grep -c '^msgid ' "$po_file");
@@ -415,7 +416,7 @@ function wpuplugincreator_update_translations(){
             fi;
 
             # Ensure X-Poedit-KeywordsList is consistent
-            if ! grep -q "${full_keywords_list}" "$po_file"; then
+            if ! grep -q "${keywords_list_val}" "$po_file"; then
                 # Add or update the X-Poedit-KeywordsList
                 if grep -q "^\"X-Poedit-KeywordsList:" "$po_file"; then
                     bashutilities_sed "s/^\"X-Poedit-KeywordsList:.*$/\"${full_keywords_list}\\\\n\"/g" "$po_file";
