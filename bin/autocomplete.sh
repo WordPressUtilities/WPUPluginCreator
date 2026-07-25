@@ -11,7 +11,7 @@ _wpuplugincreator_complete() {
     cur=${COMP_WORDS[COMP_CWORD]}
     prev=${COMP_WORDS[COMP_CWORD-1]}
 
-    local modules_list="WPUBaseAdminDatas WPUBaseAdminPage WPUBaseCron WPUBaseMessages WPUBaseSettings WPUBaseUpdate WPUBaseFields WPUBaseEmail WPUBaseToolbox WPUBaseFileCache";
+    local modules_list="WPUBaseAdminDatas WPUBaseAdminPage WPUBaseCron WPUBaseMessages WPUBaseSettings WPUBaseUpdate WPUBaseFields WPUBaseEmail WPUBaseToolbox WPUBaseFileCache WPUBaseModal";
 
     if [ $COMP_CWORD -eq 1 ]; then
         COMPREPLY=($(compgen -W "add bump-version create help new-lang plugin-check regenerate-lang self-update src update upgrade-wpubaseplugin" -- $cur))
