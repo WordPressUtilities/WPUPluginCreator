@@ -2,11 +2,11 @@
 
 WPUPluginCreator(){
 
-local _WPUPLUGINCREATOR_VERSION='0.56.0';
+local _WPUPLUGINCREATOR_VERSION='0.56.1';
 local _SOURCEDIR="$( dirname "${BASH_SOURCE[0]}" )/";
 local _TOOLSDIR="${_SOURCEDIR}sources/";
 local _CURRENT_DIR="$( pwd )/";
-local _DEPENDENCY_LIST=("WPUBaseAdminDatas" "WPUBaseAdminPage" "WPUBaseCron" "WPUBaseMessages" "WPUBaseSettings" "WPUBaseUpdate" "WPUBaseFields" "WPUBaseEmail" "WPUBaseToolbox" "WPUBaseFileCache" "WPUBaseModal");
+local _DEPENDENCY_LIST=("WPUBaseAdminDatas" "WPUBaseAdminPage" "WPUBaseCron" "WPUBaseMessages" "WPUBaseSettings" "WPUBaseUpdate" "WPUBaseFields" "WPUBaseEmail" "WPUBaseToolbox" "WPUBaseFileCache" "WPUBaseModal" "WPUBaseNotify");
 
 ###################################
 ## Initial
