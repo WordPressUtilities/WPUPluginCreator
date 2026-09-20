@@ -133,6 +133,10 @@ _content_
     bashutilities_sed "s#include dirname#require_once dirname#g" "${_plugin_file}";
     bashutilities_sed "s#include __DIR__#require_once __DIR__#g" "${_plugin_file}";
 
+    # Fix for templates
+    bashutilities_sed "s#require_once __DIR__ . '/inc/tpl#include __DIR__ . '/inc/tpl#g" "${_plugin_file}";
+    bashutilities_sed "s#require_once __DIR__ . '/tpl#include __DIR__ . '/tpl#g" "${_plugin_file}";
+
     # Fix invalid hooks
     bashutilities_sed "s#add_filter('plugins_loaded'#add_action('plugins_loaded'#g" "${_plugin_file}";
 
