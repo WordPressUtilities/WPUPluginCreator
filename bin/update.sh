@@ -119,7 +119,7 @@ _content_
     fi
 
     # Add required WordPress version
-    wpuplugincreator_update_main_file_version_replace "Requires at least" "6.2" "${_plugin_file}";
+    wpuplugincreator_update_main_file_version_replace "Requires at least" "6.9" "${_plugin_file}";
 
     # Add PHP Version
     wpuplugincreator_update_main_file_version_replace "Requires PHP" "8.0" "${_plugin_file}";
