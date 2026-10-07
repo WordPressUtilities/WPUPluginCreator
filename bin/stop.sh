@@ -34,6 +34,7 @@ unset -f wpuplugincreator_update_uninstall;
 unset -f wpuplugincreator_update_translations;
 unset -f wpuplugincreator_upgrade_wpubaseplugin;
 unset -f wpuplugincreator_wpcli_command;
+unset -f wpuplugincreator__bump_version;
 
 # Clear variables
 unset -v wpuplugincreator__translation_string;
